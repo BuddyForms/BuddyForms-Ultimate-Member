@@ -117,21 +117,122 @@ add_filter('buddyforms_front_js_css_loader', 'bf_um_front_js_css_loader', 10, 1 
 
 
 //
-// Redirect after submit to the corest Ultimate Member Profile Tab
+// Redirect after submit to the correct Ultimate Member Profile Tab
 //
 function bf_um_after_save_post_redirect($permalink){
   global $buddyforms, $ultimatemember, $post;
 
   $um_options = get_option('um_options');
 
-  // print_r($_POST);
-  // echo $permalink;
+  echo $permalink;
+
+  echo '<pre>';
+  print_r($_POST);
+  echo '</pre>';
+
+
 
   if(isset($um_options['core_user']) && $um_options['core_user'] == $post->ID)  {
     //$permalink = get_the_permalink($post->ID) . '?profiletab=product';
   }
 
-  return $permalink;
+  //return $permalink;
 
 }
 add_filter('buddyforms_after_save_post_redirect', 'bf_um_after_save_post_redirect', 10 ,1);
+
+
+/**
+ * Redirect the user to their respective profile page
+ *
+ * @package BuddyForms
+ * @since 0.3 beta
+ */
+function bf_ultimate_member_redirect_to_profile() {
+	global $post;
+
+	if( ! isset( $post->ID ) || ! is_user_logged_in() )
+		return false;
+
+	$link = bf_ultimate_member_get_redirect_link( $post->ID );
+
+	if( ! empty( $link ) ) :
+		wp_safe_redirect( $link );
+		exit;
+	endif;
+}
+add_action( 'template_redirect', 'bf_ultimate_member_redirect_to_profile', 999 );
+
+/**
+ * Get the redirect link
+ *
+ * @package BuddyForms
+ * @since 0.3 beta
+ */
+function bf_ultimate_member_get_redirect_link( $id = false ) {
+	global $buddyforms, $wp_query, $current_user;
+
+	if( ! $id )
+		return false;
+
+  echo '<pre>';
+  print_r($wp_query->query_vars);
+  echo '</pre>';
+
+	if(!isset( $wp_query->query_vars['bf_form_slug']))
+		return false;
+
+	$form_slug = $wp_query->query_vars['bf_form_slug'];
+
+	if(!isset($buddyforms[$form_slug]))
+		return false;
+
+	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
+
+	$link = '';
+	if(isset($buddyforms) && is_array($buddyforms) && isset($parent_tab)){
+
+		if(isset($buddyforms[$form_slug]['attached_page']))
+			$attached_page_id = $buddyforms[$form_slug]['attached_page'];
+
+		if(isset($buddyforms[$form_slug]['ultimate_members_profiles_integration']) && isset($attached_page_id) && $attached_page_id == $id){
+
+      $um_options = get_option('um_options');
+
+      $current_user = wp_get_current_user();
+      $userdata     = get_userdata($current_user->ID);
+
+			$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab;
+
+			if(isset($wp_query->query_vars['bf_action'])){
+				if($wp_query->query_vars['bf_action'] == 'create')
+					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form';
+				if($wp_query->query_vars['bf_action'] == 'edit')
+					$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-edit/'.$bp->unfiltered_uri[3];
+				if($wp_query->query_vars['bf_action'] == 'revision')
+					$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-revision/'.$bp->unfiltered_uri[3].'/'.$bp->unfiltered_uri[4];
+				if($wp_query->query_vars['bf_action'] == 'view')
+					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=posts';;
+
+			}
+
+		}
+
+	}
+	return apply_filters( 'bf_ultimate_member_get_redirect_link', $link );
+}
+
+function bf_ultimate_member_parent_tab($member_form){
+
+	$parent_tab_name = $member_form['slug'];
+
+	if (isset($member_form['ultimate_members_profiles_parent_tab']))
+		$parent_tab = $member_form['ultimate_members_profiles_parent_tab'];
+
+	if (isset($member_form['attached_page']) && isset($parent_tab)){
+		$attached_page = $member_form['attached_page'];
+		$parent_tab_page = get_post($attached_page, 'OBJECT');
+		$parent_tab_name = $parent_tab_page->post_name;
+	}
+	return $parent_tab_name;
+}
