@@ -71,7 +71,10 @@ function bf_pages_tab( $tabs ) {
   global $buddyforms;
   if(isset($buddyforms)) : foreach($buddyforms as $form_slug => $form){
     if(isset($form['ultimate_members_profiles_integration'])){
-        $tabs[$form_slug] = array(
+
+      	$parent_tab = bf_ultimate_member_parent_tab($form);
+
+        $tabs[$parent_tab] = array(
             'name' => $form['name'],
             'icon' => 'um-faicon-pencil',
             'subnav' => array(
@@ -83,9 +86,9 @@ function bf_pages_tab( $tabs ) {
         );
 
         // Hook the content into the coret tabs
-        add_action('um_profile_content_' . $form_slug . '_default', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
-        add_action('um_profile_content_' . $form_slug . '_posts', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
-        add_action('um_profile_content_' . $form_slug . '_form', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
+        add_action('um_profile_content_' . $parent_tab . '_default', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
+        add_action('um_profile_content_' . $parent_tab . '_posts', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
+        add_action('um_profile_content_' . $parent_tab . '_form', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
 
       }
     }
@@ -97,11 +100,11 @@ function bf_pages_tab( $tabs ) {
 // Display the Tab Content
 //
 function bf_um_profile_integration($form_slug){
-  // echo '<pre>';
-  // print_r($form_slug);
-  // echo '</pre>';
-  echo 'sadasd'.$_GET['profiletab'];
-  if(isset($_GET['profiletab']) && $_GET['profiletab'] == $form_slug ){
+  global $buddyforms;
+
+	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
+
+  if(isset($_GET['profiletab']) && $_GET['profiletab'] == $parent_tab ){
     if(isset($_GET['subnav']) && $_GET['subnav'] == 'posts')  {
       echo do_shortcode('[buddyforms_the_loop form_slug="'.$form_slug.'"]');
     } else {
