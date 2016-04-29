@@ -1,7 +1,7 @@
 <?php
 
 /*
- Plugin Name: BuddyForms UltimateMember
+ Plugin Name: BuddyForms Ultimate Member
  Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
  Description: UltimateMember Integration
  Version: 1.0
@@ -136,7 +136,21 @@ print_r($form_slug);
     if(!isset($_GET['subnav']) || $_GET['subnav'] == 'posts-' . $form_slug)  {
       echo do_shortcode('[buddyforms_the_loop form_slug="'.$form_slug.'"]');
     } else {
-      echo do_shortcode('[buddyforms_form form_slug="'.$form_slug.'"]');
+
+
+    $args = array(
+      'form_slug' => $form_slug
+    );
+
+    if(isset($_GET['bf_post_id']))
+      $args['post_id'] = $_GET['bf_post_id'];
+
+    if(isset($_GET['bf_rev_id']))
+      $args['revision_id'] = $_GET['bf_rev_id'];
+
+    buddyforms_create_edit_form($args);
+
+      //echo do_shortcode('[buddyforms_form form_slug="'.$form_slug.'"]');
     }
   }
 }
@@ -241,13 +255,14 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 
 			if(isset($wp_query->query_vars['bf_action'])){
 				if($wp_query->query_vars['bf_action'] == 'create')
-					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form';
+					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug;
 				if($wp_query->query_vars['bf_action'] == 'edit')
-					$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-edit/'.$bp->unfiltered_uri[3];
+          $link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'];
 				if($wp_query->query_vars['bf_action'] == 'revision')
-					$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-revision/'.$bp->unfiltered_uri[3].'/'.$bp->unfiltered_uri[4];
+          $link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'] . '&bf_rev_id=' . $wp_query->query_vars['bf_rev_id'];
+					//$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-revision/'.$bp->unfiltered_uri[3].'/'.$bp->unfiltered_uri[4];
 				if($wp_query->query_vars['bf_action'] == 'view')
-					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=posts';;
+					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=posts-' . $form_slug;
 
 			}
 
@@ -256,6 +271,56 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 	}
 	return apply_filters( 'bf_ultimate_member_get_redirect_link', $link );
 }
+
+
+
+
+
+
+/**
+ * Link router function
+ *
+ * @package BuddyForms
+ * @since 0.3 beta
+ * @uses	bp_get_option()
+ * @uses	is_page()
+ * @uses	bp_loggedin_user_domain()
+ */
+function bf_ultimate_member_page_link_router( $link, $id )	{
+	if( ! is_user_logged_in() || is_admin() )
+		return $link;
+
+	$new_link = bf_ultimate_member_get_redirect_link( $id );
+
+	if( ! empty( $new_link ) )
+		$link = $new_link;
+
+	return apply_filters( 'bf_ultimate_member_page_link_router', $link );
+}
+add_filter( 'page_link', 'bf_ultimate_member_page_link_router', 10, 2 );
+
+function bf_ultimate_member_page_link_router_edit($link, $id){
+	global $buddyforms;
+
+	$form_slug = get_post_meta($id, '_bf_form_slug', true);
+
+	if(!$form_slug)
+		return $link;
+
+	if(!$buddyforms[$form_slug]['ultimate_members_profiles_integration'])
+		return $link;
+
+	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
+
+	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . bp_loggedin_user_domain()  . $parent_tab. '/'. $form_slug .'-edit/' . $id . '">' . __( 'Edit', 'buddyforms' ) .'</a>';
+}
+add_filter( 'bf_loop_edit_post_link', 'bf_members_page_link_router_edit', 10, 2 );
+
+
+
+
+
+
 
 // Helper function to get the parent slug for the profil navigation
 function bf_ultimate_member_parent_tab($member_form){
