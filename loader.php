@@ -66,46 +66,74 @@
 
 
 // Add a custom tabs to the profile
-add_filter('um_profile_tabs', 'bf_pages_tab', 1000 );
-function bf_pages_tab( $tabs ) {
+add_filter('um_profile_tabs', 'bf_profile_tabs', 1000 );
+function bf_profile_tabs( $tabs ) {
   global $buddyforms;
-  if(isset($buddyforms)) : foreach($buddyforms as $form_slug => $form){
+
+  // run thrue all forms and check if they should get integrated
+  if(isset($buddyforms)) : foreach($buddyforms as $form_slug => $form) :
     if(isset($form['ultimate_members_profiles_integration'])){
 
-      	$parent_tab = bf_ultimate_member_parent_tab($form);
+      // Set the Tap slug
+      $parent_tab_slug = bf_ultimate_member_parent_tab($form);
 
-        $tabs[$parent_tab] = array(
-            'name' => $form['name'],
+      // Set the Tab name
+      $parent_tab_name = $form['name'];
+
+      // Check if the form has a parent tap and use the parent tab name instad the from name
+      if (isset($form['ultimate_members_profiles_integration'])
+          && isset($form['ultimate_members_profiles_parent_tab'])){
+        $attached_page = $form['attached_page'];
+        $parent_tab_page = get_post($attached_page, 'OBJECT');
+        $parent_tab_name = $parent_tab_page->post_title;
+      }
+
+      // Check if this form is grouped under a Parent Tap and only create the nav item once
+      if( ! isset($tabs[$parent_tab_slug] )){
+        $tabs[$parent_tab_slug] = array(
+            'name' => $parent_tab_name ,
             'icon' => 'um-faicon-pencil',
-            'subnav' => array(
-              'posts' => __('View','buddyforms'),
-              'form' => __('Create','buddyforms'),
-            ),
-            'subnav_default' => 'posts',
             'custom' => true
         );
-
-        // Hook the content into the coret tabs
-        add_action('um_profile_content_' . $parent_tab . '_default', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
-        add_action('um_profile_content_' . $parent_tab . '_posts', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
-        add_action('um_profile_content_' . $parent_tab . '_form', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
-
+        $tabs[$parent_tab_slug]['subnav_default'] = 'posts-' . $form_slug;
+        add_action('um_profile_content_' . $parent_tab_slug . '_default' , create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
       }
+
+      $tabs[$parent_tab_slug]['subnav']['posts-' . $form_slug] = __('View ' . $form['singular_name'],'buddyforms');
+
+      if(um_is_user_himself()){
+        // Add the Subtabs to the Ultimate Member Menue
+        $tabs[$parent_tab_slug]['subnav']['form-' . $form_slug] = __('Create ' . $form['singular_name'],'buddyforms');
+      }
+
+      // echo '<pre>';
+      // print_r($tabs);
+      // echo '</pre>';
+
+      // Hook the content into the coret tabs
+      add_action('um_profile_content_' . $parent_tab_slug . '_posts-' . $form_slug, create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
+      add_action('um_profile_content_' . $parent_tab_slug . '_form-' . $form_slug, create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
+
     }
-  endif;
+  endforeach; endif;
   return $tabs;
 }
 
 //
 // Display the Tab Content
 //
-function bf_um_profile_integration($form_slug){
+function bf_profile_tabs_content($form_slug){
   global $buddyforms;
 
+echo 'daDADADAda';
+print_r($form_slug);
+
+  // Get the correct tab slug
 	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
 
+  // Check if the ultimate member view is a form view and add the coret content
   if(isset($_GET['profiletab']) && $_GET['profiletab'] == $parent_tab ){
-    if(isset($_GET['subnav']) && $_GET['subnav'] == 'posts')  {
+    if(!isset($_GET['subnav']) || $_GET['subnav'] == 'posts-' . $form_slug)  {
       echo do_shortcode('[buddyforms_the_loop form_slug="'.$form_slug.'"]');
     } else {
       echo do_shortcode('[buddyforms_form form_slug="'.$form_slug.'"]');
@@ -113,6 +141,10 @@ function bf_um_profile_integration($form_slug){
   }
 }
 
+//
+// Load all needed css and js
+// @todo: this should not be global.
+//
 function bf_um_front_js_css_loader($fount){
     return true;
 }
@@ -129,12 +161,12 @@ function bf_um_after_save_post_redirect($permalink){
 
   echo $permalink;
 
-  echo '<pre>';
-  print_r($_POST);
-  echo '</pre>';
+  // echo '<pre>';
+  // print_r($_POST);
+  // echo '</pre>';
 
 
-
+  // Check if the form isi submited form within Ultimate Member and do the redirect to the profile is yes.
   if(isset($um_options['core_user']) && $um_options['core_user'] == $post->ID)  {
     //$permalink = get_the_permalink($post->ID) . '?profiletab=product';
   }
@@ -178,9 +210,9 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 	if( ! $id )
 		return false;
 
-  echo '<pre>';
-  print_r($wp_query->query_vars);
-  echo '</pre>';
+  // echo '<pre>';
+  // print_r($wp_query->query_vars);
+  // echo '</pre>';
 
 	if(!isset( $wp_query->query_vars['bf_form_slug']))
 		return false;
@@ -225,6 +257,7 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 	return apply_filters( 'bf_ultimate_member_get_redirect_link', $link );
 }
 
+// Helper function to get the parent slug for the profil navigation
 function bf_ultimate_member_parent_tab($member_form){
 
 	$parent_tab_name = $member_form['slug'];
