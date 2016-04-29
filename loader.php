@@ -29,11 +29,12 @@
  ****************************************************************************
  */
 
-
+// Create the Form Builder Sidebar Metabox
  function buddyforms_ultimate_members_admin_settings_sidebar_metabox(){
      add_meta_box('buddyforms_ultimate_members', __("Ultimate Members",'buddyforms'), 'buddyforms_ultimate_members_admin_settings_sidebar_metabox_html', 'buddyforms', 'side', 'low');
  }
 
+// Form Builder Sidebar Metabox Content
  function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html(){
      global $post, $buddyforms;
 
@@ -41,8 +42,6 @@
          return;
 
      $buddyform = get_post_meta(get_the_ID(), '_buddyforms_options', true);
-
-
      $form_setup = array();
 
      $ultimate_members_profiles_integration = '';
@@ -66,7 +65,7 @@
  add_filter('add_meta_boxes','buddyforms_ultimate_members_admin_settings_sidebar_metabox');
 
 
-/* add a custom tab to show user pages */
+// Add a custom tabs to the profile
 add_filter('um_profile_tabs', 'bf_pages_tab', 1000 );
 function bf_pages_tab( $tabs ) {
   global $buddyforms;
@@ -82,9 +81,11 @@ function bf_pages_tab( $tabs ) {
             'subnav_default' => 'posts',
             'custom' => true
         );
-        add_action('um_profile_content_' . $form_slug . '_default', create_function('$form_slug', 'bf_um_profile_form_test('.$form_slug.');'));
-        add_action('um_profile_content_' . $form_slug . '_posts', create_function('$form_slug', 'bf_um_profile_form_test('.$form_slug.');'));
-        add_action('um_profile_content_' . $form_slug . '_form', create_function('$form_slug', 'bf_um_profile_form_test('.$form_slug.');'));
+
+        // Hook the content into the coret tabs
+        add_action('um_profile_content_' . $form_slug . '_default', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
+        add_action('um_profile_content_' . $form_slug . '_posts', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
+        add_action('um_profile_content_' . $form_slug . '_form', create_function('$form_slug', 'bf_um_profile_integration('.$form_slug.');'));
 
       }
     }
@@ -92,8 +93,10 @@ function bf_pages_tab( $tabs ) {
   return $tabs;
 }
 
-
-function bf_um_profile_form_test($form_slug){
+//
+// Display the Tab Content
+//
+function bf_um_profile_integration($form_slug){
   // echo '<pre>';
   // print_r($form_slug);
   // echo '</pre>';
@@ -114,31 +117,21 @@ add_filter('buddyforms_front_js_css_loader', 'bf_um_front_js_css_loader', 10, 1 
 
 
 //
-// Redirect to  single posts list, if form settup -> after submit is set to display posts list
+// Redirect after submit to the corest Ultimate Member Profile Tab
 //
 function bf_um_after_save_post_redirect($permalink){
   global $buddyforms, $ultimatemember, $post;
 
   $um_options = get_option('um_options');
 
-print_r($_POST);
-
-echo $permalink;
+  // print_r($_POST);
+  // echo $permalink;
 
   if(isset($um_options['core_user']) && $um_options['core_user'] == $post->ID)  {
     //$permalink = get_the_permalink($post->ID) . '?profiletab=product';
   }
 
-
-  // if (isset($buddyforms[$_POST['form_slug']]['after_submit'])) {
-  //     if ($buddyforms[$_POST['form_slug']]['after_submit'] == 'display_posts_list') {
-  //         $permalink = bp_get_group_permalink() . bp_current_action();
-  //     }
-  // }
-
-
-
-return $permalink;
+  return $permalink;
 
 }
 add_filter('buddyforms_after_save_post_redirect', 'bf_um_after_save_post_redirect', 10 ,1);
