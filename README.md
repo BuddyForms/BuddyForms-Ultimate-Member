@@ -1,2 +1,2 @@
 # BuddyForms-UltimateMember
-Extend UltimateMember Profil with BuddyForms Forms 
+Extend Ultimate Member Profiles with BuddyForms Forms 

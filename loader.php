@@ -4,7 +4,7 @@
  Plugin Name: BuddyForms Ultimate Member
  Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
  Description: UltimateMember Integration
- Version: 1.0
+ Version: 0.1
  Author: Sven Lehnert
  Author URI: https://profiles.wordpress.org/svenl77
  License: GPLv2 or later
@@ -38,24 +38,25 @@
  function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html(){
      global $post, $buddyforms;
 
+     // Only integrate if we are in theh frombuilder
      if($post->post_type != 'buddyforms')
          return;
 
-     $buddyform = get_post_meta(get_the_ID(), '_buddyforms_options', true);
-     $form_setup = array();
+    // Get the form options
+    $buddyform = get_post_meta(get_the_ID(), '_buddyforms_options', true);
 
-     $ultimate_members_profiles_integration = '';
-     if(isset($buddyform['ultimate_members_profiles_integration']))
-         $ultimate_members_profiles_integration = $buddyform['ultimate_members_profiles_integration'];
+    // Create an array for the form elements
+    $form_setup = array();
 
-     $ultimate_members_profiles_parent_tab = false;
-     if(isset($buddyform['ultimate_members_profiles_parent_tab']))
-         $ultimate_members_profiles_parent_tab = $buddyform['ultimate_members_profiles_parent_tab'];
+    // Get the form element values from the form options array
+    $ultimate_members_profiles_integration = isset($buddyform['ultimate_members_profiles_integration']) ? $buddyform['ultimate_members_profiles_integration'] : '';
+    $ultimate_members_profiles_parent_tab = isset($buddyform['ultimate_members_profiles_parent_tab']) ? $buddyform['ultimate_members_profiles_parent_tab'] : '';
 
+    // Add the form elements
      $form_setup[] = new Element_Checkbox("<b>" . __('Add this form as Profile Tab', 'buddyforms') . "</b>", "buddyforms_options[ultimate_members_profiles_integration]", array("integrate" => "Integrate this Form"), array('value' => $ultimate_members_profiles_integration, 'shortDesc' => __('Many forms can share the same attached page. All Forms with the same attached page can be grouped together with this option. All Forms will be listed as sub nav tabs of the page main nav', 'buddyforms')));
      $form_setup[] = new Element_Checkbox("<br><b>" . __('Use Attached Page as Parent Tab and make this form a sub tab of the parent', 'buddyforms') . "</b>", "buddyforms_options[ultimate_members_profiles_parent_tab]", array("attached_page" => "Use Attached Page as Parent"), array('value' => $ultimate_members_profiles_parent_tab, 'shortDesc' => __('Many Forms can have the same attached Page. All Forms with the same page with page as parent enabled will be listed as sub forms. This why you can group forms.', 'buddyforms')));
-     //$form_setup[] = new Element_Checkbox("<br><b>" . __('Hide Post List', 'buddyforms') . "</b>", "buddyforms_options[profiles_parent_tab]", array("hide" => "Hide"), array('value' => $profiles_parent_tab, 'shortDesc' => __('Can be useful if you want to display all posts in one tab and only separate the forms', 'buddyforms')));
 
+     // Loop thrue all form elements and echo the content
      foreach($form_setup as $key => $field){
          echo '<div class="buddyforms_field_label">' . $field->getLabel() . '</div>';
          echo '<div class="buddyforms_field_description">' . $field->getShortDesc() . '</div>';
@@ -99,16 +100,16 @@ function bf_profile_tabs( $tabs ) {
         add_action('um_profile_content_' . $parent_tab_slug . '_default' , create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
       }
 
+      // Add the Subtabs to the Ultimate Member Menue
       $tabs[$parent_tab_slug]['subnav']['posts-' . $form_slug] = __('View ' . $form['singular_name'],'buddyforms');
 
+      // Add the Subtab for the create only if diplayd profil is from loged in user.
       if(um_is_user_himself()){
-        // Add the Subtabs to the Ultimate Member Menue
-        $tabs[$parent_tab_slug]['subnav']['form-' . $form_slug] = __('Create ' . $form['singular_name'],'buddyforms');
+        // Check if the user has the needed rights
+  			if (current_user_can('buddyforms_' . $form_slug . '_create')) {
+          $tabs[$parent_tab_slug]['subnav']['form-' . $form_slug] = __('Create ' . $form['singular_name'],'buddyforms');
+        }
       }
-
-      // echo '<pre>';
-      // print_r($tabs);
-      // echo '</pre>';
 
       // Hook the content into the coret tabs
       add_action('um_profile_content_' . $parent_tab_slug . '_posts-' . $form_slug, create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
@@ -125,32 +126,32 @@ function bf_profile_tabs( $tabs ) {
 function bf_profile_tabs_content($form_slug){
   global $buddyforms;
 
-echo 'daDADADAda';
-print_r($form_slug);
-
   // Get the correct tab slug
 	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
 
   // Check if the ultimate member view is a form view and add the coret content
   if(isset($_GET['profiletab']) && $_GET['profiletab'] == $parent_tab ){
     if(!isset($_GET['subnav']) || $_GET['subnav'] == 'posts-' . $form_slug)  {
+
+      // Display the posts
       echo do_shortcode('[buddyforms_the_loop form_slug="'.$form_slug.'"]');
+
     } else {
 
+      // Create the arguments aray for the form to get displayed
+      $args = array(
+        'form_slug' => $form_slug
+      );
 
-    $args = array(
-      'form_slug' => $form_slug
-    );
+      // Add the post ide if post edit
+      if(isset($_GET['bf_post_id']))
+        $args['post_id'] = $_GET['bf_post_id'];
 
-    if(isset($_GET['bf_post_id']))
-      $args['post_id'] = $_GET['bf_post_id'];
+      // Add the revisionsid if needed
+      if(isset($_GET['bf_rev_id']))
+        $args['revision_id'] = $_GET['bf_rev_id'];
 
-    if(isset($_GET['bf_rev_id']))
-      $args['revision_id'] = $_GET['bf_rev_id'];
-
-    buddyforms_create_edit_form($args);
-
-      //echo do_shortcode('[buddyforms_form form_slug="'.$form_slug.'"]');
+      buddyforms_create_edit_form($args);
     }
   }
 }
@@ -272,11 +273,6 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 	return apply_filters( 'bf_ultimate_member_get_redirect_link', $link );
 }
 
-
-
-
-
-
 /**
  * Link router function
  *
@@ -315,12 +311,6 @@ function bf_ultimate_member_page_link_router_edit($link, $id){
 	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . bp_loggedin_user_domain()  . $parent_tab. '/'. $form_slug .'-edit/' . $id . '">' . __( 'Edit', 'buddyforms' ) .'</a>';
 }
 add_filter( 'bf_loop_edit_post_link', 'bf_members_page_link_router_edit', 10, 2 );
-
-
-
-
-
-
 
 // Helper function to get the parent slug for the profil navigation
 function bf_ultimate_member_parent_tab($member_form){
