@@ -3,7 +3,7 @@
 /*
  Plugin Name: BuddyForms Ultimate Member
  Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
- Description: UltimateMember Integration
+ Description: Extend Ultimate Member Profiles with BuddyForms
  Version: 0.1
  Author: Sven Lehnert
  Author URI: https://profiles.wordpress.org/svenl77
@@ -32,17 +32,23 @@
  add_action('init', 'buddyforms_ultimate_members_init', 1999999999);
 
 function buddyforms_ultimate_members_init(){
+
+  // Check if BuddyForms is activated
   if( ! defined( 'BUDDYFORMS_VERSION' )){
      add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs BuddyForms to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" );' ) );
      return;
-   }
-   if( ! class_exists('UM_API')){
+  }
+
+  // Check if Ultimate Member is activated
+  if( ! class_exists('UM_API')){
      add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs Ultimate Members to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "https://ultimatemember.com/" );' ) );
      return;
-   }
+  }
 
-  require (dirname(__FILE__) . '/includes/form-builder.php');
-  require (dirname(__FILE__) . '/includes/functions.php');
-  require (dirname(__FILE__) . '/includes/redirect.php');
-  require (dirname(__FILE__) . '/includes/ultimate-member-extension.php');
+  // Require all needed files
+  require ( dirname(__FILE__) . '/includes/form-builder.php' );
+  require ( dirname(__FILE__) . '/includes/functions.php' );
+  require ( dirname(__FILE__) . '/includes/redirect.php' );
+  require ( dirname(__FILE__) . '/includes/ultimate-member-extension.php' );
+
 }

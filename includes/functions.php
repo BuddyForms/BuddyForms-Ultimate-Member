@@ -100,4 +100,4 @@ if(!$flush_rewrite_rules)
   }
 
 }
-add_action('buddyforms_after_attache_page_rewrite_rules', 'buddyforms_ultimate_member_after_attache_page_rewrite_rules', 199999999, 1);
+//add_action('buddyforms_after_attache_page_rewrite_rules', 'buddyforms_ultimate_member_after_attache_page_rewrite_rules', 199999999, 1);
