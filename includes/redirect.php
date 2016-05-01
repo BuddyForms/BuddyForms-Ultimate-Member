@@ -1,31 +1,5 @@
 <?php
 
-//
-// Redirect after submit to the correct Ultimate Member Profile Tab
-//
-function bf_um_after_save_post_redirect($permalink){
-  global $buddyforms, $ultimatemember, $post;
-
-  $um_options = get_option('um_options');
-
-  //echo $permalink;
-
-  // echo '<pre>';
-  // print_r($_POST);
-  // echo '</pre>';
-
-
-  // Check if the form isi submited form within Ultimate Member and do the redirect to the profile is yes.
-  if(isset($um_options['core_user']) && $um_options['core_user'] == $post->ID)  {
-    $permalink = get_the_permalink($post->ID) . '?profiletab=product';
-  }
-
-  return $permalink;
-
-}
-add_filter('buddyforms_after_save_post_redirect', 'bf_um_after_save_post_redirect', 99 ,1);
-
-
 /**
  * Redirect the user to their respective profile page
  *
@@ -58,10 +32,6 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 
 	if( ! $id )
 		return false;
-
-  // echo '<pre>';
-  // print_r($wp_query->query_vars);
-  // echo '</pre>';
 
 	if(!isset( $wp_query->query_vars['bf_form_slug']))
 		return false;
@@ -129,6 +99,9 @@ function bf_ultimate_member_page_link_router( $link, $id )	{
 }
 add_filter( 'page_link', 'bf_ultimate_member_page_link_router', 10, 2 );
 
+//
+// Link Router for the Loop
+//
 function bf_ultimate_member_page_link_router_edit($link, $id){
 	global $buddyforms, $current_user;
 
@@ -142,7 +115,6 @@ function bf_ultimate_member_page_link_router_edit($link, $id){
 		return $link;
 
 	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
-
 
   $current_user = wp_get_current_user();
   $userdata     = get_userdata($current_user->ID);
