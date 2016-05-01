@@ -29,7 +29,7 @@
  ****************************************************************************
  */
 
- add_action('init', 'buddyforms_ultimate_members_init', 1999999999);
+ add_action('init', 'buddyforms_ultimate_members_init');
 
 function buddyforms_ultimate_members_init(){
 
