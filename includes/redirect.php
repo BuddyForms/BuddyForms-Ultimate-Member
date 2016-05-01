@@ -130,9 +130,10 @@ function bf_ultimate_member_page_link_router( $link, $id )	{
 add_filter( 'page_link', 'bf_ultimate_member_page_link_router', 10, 2 );
 
 function bf_ultimate_member_page_link_router_edit($link, $id){
-	global $buddyforms;
+	global $buddyforms, $current_user;
 
-	$form_slug = get_post_meta($id, '_bf_form_slug', true);
+	$form_slug   = get_post_meta($id, '_bf_form_slug', true);
+  $um_options  = get_option('um_options');
 
 	if(!$form_slug)
 		return $link;
@@ -142,6 +143,12 @@ function bf_ultimate_member_page_link_router_edit($link, $id){
 
 	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
 
-	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . bp_loggedin_user_domain()  . $parent_tab. '/'. $form_slug .'-edit/' . $id . '">' . __( 'Edit', 'buddyforms' ) .'</a>';
+
+  $current_user = wp_get_current_user();
+  $userdata     = get_userdata($current_user->ID);
+
+  $link_href = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $id;
+
+  return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . $link_href . '">' . __( 'Edit', 'buddyforms' ) .'</a>';
 }
-add_filter( 'bf_loop_edit_post_link', 'bf_members_page_link_router_edit', 10, 2 );
+add_filter( 'bf_loop_edit_post_link', 'bf_ultimate_member_page_link_router_edit', 10, 2 );
