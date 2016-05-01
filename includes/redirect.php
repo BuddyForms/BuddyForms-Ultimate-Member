@@ -49,6 +49,7 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 		if(isset($buddyforms[$form_slug]['attached_page']))
 			$attached_page_id = $buddyforms[$form_slug]['attached_page'];
 
+		// Only create a new url if the profile inetgration is enabled and the corect attached page displayed.
 		if(isset($buddyforms[$form_slug]['ultimate_members_profiles_integration']) && isset($attached_page_id) && $attached_page_id == $id){
 
       $um_options = get_option('um_options');
@@ -58,6 +59,7 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 
 			$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab;
 
+			// Check the bf_action action query var and create the Ultimate member url for the correct action
 			if(isset($wp_query->query_vars['bf_action'])){
 				if($wp_query->query_vars['bf_action'] == 'create')
 					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug;
@@ -65,7 +67,6 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
           $link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'];
 				if($wp_query->query_vars['bf_action'] == 'revision')
           $link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'] . '&bf_rev_id=' . $wp_query->query_vars['bf_rev_id'];
-					//$link = bp_loggedin_user_domain() . $parent_tab .'/' . $form_slug . '-revision/'.$bp->unfiltered_uri[3].'/'.$bp->unfiltered_uri[4];
 				if($wp_query->query_vars['bf_action'] == 'view')
 					$link = get_the_permalink($um_options['core_user']) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=posts-' . $form_slug;
 
