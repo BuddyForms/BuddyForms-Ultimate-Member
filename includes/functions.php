@@ -101,3 +101,9 @@ if(!$flush_rewrite_rules)
 
 }
 //add_action('buddyforms_after_attache_page_rewrite_rules', 'buddyforms_ultimate_member_after_attache_page_rewrite_rules', 199999999, 1);
+
+add_filter('up_rewrite_flush_rewrite_rules', 'buddyforms_um_rewrite_flush_rewrite_rules');
+
+function buddyforms_ultimate_member_rewrite_flush_rewrite_rules(){
+
+}
