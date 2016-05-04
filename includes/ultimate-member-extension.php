@@ -6,7 +6,7 @@ function bf_profile_tabs( $tabs ) {
   global $buddyforms;
 
   // run thrue all forms and check if they should get integrated
-  if(isset($buddyforms)) : foreach($buddyforms as $form_slug => $form) :
+  if(isset($buddyforms) && is_array($buddyforms)) : foreach($buddyforms as $form_slug => $form) :
     if(isset($form['ultimate_members_profiles_integration'])){
 
       // Set the Tap slug
