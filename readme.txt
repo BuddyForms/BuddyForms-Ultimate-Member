@@ -1,15 +1,15 @@
 === BuddyForms Ultimate Member ===
 Contributors: svenl77, buddyforms
 Tags: BuddyForms Ultimate Member
-Requires at least: WordPress 4.5
-Tested up to: WordPress 4.5
+Requires at least: WordPress 4.0
+Tested up to: WordPress 4.5.2
 License: GPLv2 or later
-Stable tag: 0.1
+Stable tag: 1.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 BuddyForms Ultimate Member integrates BuddyForms with Ultimate Member
 
-== Description == 
+== Description ==
 
 This is the BuddyForms Ultimate Member Extension. Integrate your BuddyForms Forms into your Ultimate Member. You need the BuddyForms plugin installed for the plugin to work. <a href="http://buddyforms.com" target="_blank">Get BuddyForms now!</a>
 
