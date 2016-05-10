@@ -3,11 +3,15 @@
 // Add a custom tabs to the profile
 add_filter('um_profile_tabs', 'bf_profile_tabs', 1000 );
 function bf_profile_tabs( $tabs ) {
-  global $buddyforms;
+  global $buddyforms, $bf_um_tabs;
 
   // run thrue all forms and check if they should get integrated
   if(isset($buddyforms) && is_array($buddyforms)) : foreach($buddyforms as $form_slug => $form) :
     if(isset($form['ultimate_members_profiles_integration'])){
+
+
+      $bf_um_form_slug = str_replace('-', '', $form_slug);
+      $bf_um_tabs[$bf_um_form_slug] = $form_slug;
 
       // Set the Tap slug
       $parent_tab_slug = bf_ultimate_member_parent_tab($form);
@@ -30,24 +34,24 @@ function bf_profile_tabs( $tabs ) {
             'icon' => 'um-faicon-pencil',
             'custom' => true
         );
-        $tabs[$parent_tab_slug]['subnav_default'] = 'posts-' . $form_slug;
-        add_action('um_profile_content_' . $parent_tab_slug . '_default' , create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
+        $tabs[$parent_tab_slug]['subnav_default'] = 'posts-' . $bf_um_form_slug;
+        add_action('um_profile_content_' . $parent_tab_slug . '_default' , create_function('$args', 'bf_profile_tabs_content(' . $bf_um_form_slug . ');'));
       }
 
       // Add the Subtabs to the Ultimate Member Menue
-      $tabs[$parent_tab_slug]['subnav']['posts-' . $form_slug] = __('View ' . $form['singular_name'],'buddyforms');
+      $tabs[$parent_tab_slug]['subnav']['posts-' . $bf_um_form_slug] = __('View ' . $form['singular_name'],'buddyforms');
 
       // Add the Subtab for the create only if diplayd profil is from loged in user.
       if(um_is_user_himself()){
         // Check if the user has the needed rights
   			if (current_user_can('buddyforms_' . $form_slug . '_create')) {
-          $tabs[$parent_tab_slug]['subnav']['form-' . $form_slug] = __('Create ' . $form['singular_name'],'buddyforms');
+          $tabs[$parent_tab_slug]['subnav']['form-' . $bf_um_form_slug] = __('Create ' . $form['singular_name'],'buddyforms');
         }
       }
 
       // Hook the content into the coret tabs
-      add_action('um_profile_content_' . $parent_tab_slug . '_posts-' . $form_slug, create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
-      add_action('um_profile_content_' . $parent_tab_slug . '_form-' . $form_slug, create_function('$form_slug', 'bf_profile_tabs_content('.$form_slug.');'));
+      add_action('um_profile_content_' . $parent_tab_slug . '_posts-' . $bf_um_form_slug, create_function('$args', 'bf_profile_tabs_content(' . $bf_um_form_slug . ');'));
+      add_action('um_profile_content_' . $parent_tab_slug . '_form-' . $bf_um_form_slug, create_function('$args', 'bf_profile_tabs_content(' . $bf_um_form_slug . ');'));
 
     }
   endforeach; endif;
@@ -57,15 +61,17 @@ function bf_profile_tabs( $tabs ) {
 //
 // Display the Tab Content
 //
-function bf_profile_tabs_content($form_slug){
-  global $buddyforms;
+function bf_profile_tabs_content($bf_um_form_slug){
+  global $buddyforms, $bf_um_tabs;
+
+  $form_slug = $bf_um_tabs[$bf_um_form_slug];
 
   // Get the correct tab slug
 	$parent_tab = bf_ultimate_member_parent_tab($buddyforms[$form_slug]);
 
   // Check if the ultimate member view is a form view and add the coret content
   if(isset($_GET['profiletab']) && $_GET['profiletab'] == $parent_tab ){
-    if(!isset($_GET['subnav']) || $_GET['subnav'] == 'posts-' . $form_slug)  {
+    if(!isset($_GET['subnav']) || $_GET['subnav'] == 'posts-' . $bf_um_form_slug)  {
 
       // Display the posts
       echo do_shortcode('[buddyforms_the_loop form_slug="'.$form_slug.'"]');
@@ -77,7 +83,7 @@ function bf_profile_tabs_content($form_slug){
         'form_slug' => $form_slug
       );
 
-      // Add the post ide if post edit
+      // Add the post id if post edit
       if(isset($_GET['bf_post_id']))
         $args['post_id'] = $_GET['bf_post_id'];
 
