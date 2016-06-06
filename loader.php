@@ -1,5 +1,4 @@
 <?php
-
 /*
  Plugin Name: BuddyForms Ultimate Member
  Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
@@ -29,26 +28,28 @@
  ****************************************************************************
  */
 
- add_action('init', 'buddyforms_ultimate_members_init');
+add_action( 'init', 'buddyforms_ultimate_members_init' );
 
-function buddyforms_ultimate_members_init(){
+function buddyforms_ultimate_members_init() {
 
-  // Check if BuddyForms is activated
-  if( ! defined( 'BUDDYFORMS_VERSION' )){
-     add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs BuddyForms to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" );' ) );
-     return;
-  }
+	// Check if BuddyForms is activated
+	if ( ! defined( 'BUDDYFORMS_VERSION' ) ) {
+		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs BuddyForms to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" );' ) );
 
-  // Check if Ultimate Member is activated
-  if( ! class_exists('UM_API')){
-     add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs Ultimate Members to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "https://ultimatemember.com/" );' ) );
-     return;
-  }
+		return;
+	}
 
-  // Require all needed files
-  require ( dirname(__FILE__) . '/includes/form-builder.php' );
-  require ( dirname(__FILE__) . '/includes/functions.php' );
-  require ( dirname(__FILE__) . '/includes/redirect.php' );
-  require ( dirname(__FILE__) . '/includes/ultimate-member-extension.php' );
+	// Check if Ultimate Member is activated
+	if ( ! class_exists( 'UM_API' ) ) {
+		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs Ultimate Members to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "https://ultimatemember.com/" );' ) );
+
+		return;
+	}
+
+	// Require all needed files
+	require( dirname( __FILE__ ) . '/includes/form-builder.php' );
+	require( dirname( __FILE__ ) . '/includes/functions.php' );
+	require( dirname( __FILE__ ) . '/includes/redirect.php' );
+	require( dirname( __FILE__ ) . '/includes/ultimate-member-extension.php' );
 
 }

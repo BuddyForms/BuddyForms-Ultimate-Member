@@ -1,13 +1,13 @@
 === BuddyForms Ultimate Member ===
 Contributors: svenl77, buddyforms
-Tags: BuddyForms Ultimate Member
+Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: WordPress 4.0
 Tested up to: WordPress 4.5.2
 License: GPLv2 or later
 Stable tag: 1.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-BuddyForms Ultimate Member integrates BuddyForms with Ultimate Member
+Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs, group Forms. Works with any PostType Plugin and Theme.
 
 == Description ==
 
@@ -53,6 +53,22 @@ You can choose how your members create, manage and edit their posts. Full contro
 
 Adjust the permissions for every form to your needs.
 
+<h4>Extendable</h4>
+
+Works with:
+<ul>
+<li>WooCommerce</li>
+<li>WooCommerce Simple Auctions</li>
+<li>Advanced Custom Fields</li>
+<li>Posts 2 Posts</li>
+<li>And many more. See the <a href="https://buddyforms.com/extensions-for-wordpress-forms/" target="_blank">Extensions</a> on the BuddyForms.com site for all available extensions</li>
+</ul>
+
+
+<h4>See this Video how to use the Plugin</h4>
+[youtube https://www.youtube.com/watch?v=b7YNax-ORzQ]
+
+
 == Documentation & Support ==
 
 <h4>Extensive Documentation and Support</h4>
@@ -68,8 +84,8 @@ You can find all help buttons in your BuddyForms Settings Panel in your WP Dashb
 <h4>Dependencies</h4>
 <p>Please make sure you have the following plugins installed and activated:</p>
 <ul>
-  <li><a href=">BuddyForms</a></li>
-  <li><a href=">UltimateMember</a></li>
+  <li><a target="_blank" href="https://buddyforms.com/">BuddyForms</a></li>
+  <li><a target="_blank" href="https://ultimatemember.com/">Ultimate Member</a></li>
 </ul>
 <br><br>
 
@@ -88,6 +104,7 @@ BuddyForms and Ultimate Member
 
 == Screenshots ==
 
+1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
 
