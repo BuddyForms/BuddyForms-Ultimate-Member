@@ -76,7 +76,7 @@ function bf_profile_tabs_content( $bf_um_form_slug ) {
 		if ( ! isset( $_GET['subnav'] ) || $_GET['subnav'] == 'posts-' . $bf_um_form_slug ) {
 
 			// Display the posts
-			echo do_shortcode( '[buddyforms_the_loop form_slug="' . $form_slug . '"]' );
+			echo do_shortcode( '[buddyforms_the_loop form_slug="' . $form_slug . '" author="' . um_profile_id() . '"]' );
 
 		} else {
 
