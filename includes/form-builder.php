@@ -3,7 +3,9 @@
 // Create the Form Builder Sidebar Metabox
 function buddyforms_ultimate_members_admin_settings_sidebar_metabox() {
 	add_meta_box( 'buddyforms_ultimate_members', __( "Ultimate Members", 'buddyforms' ), 'buddyforms_ultimate_members_admin_settings_sidebar_metabox_html', 'buddyforms', 'normal', 'low' );
+	add_filter('postbox_classes_buddyforms_buddyforms_ultimate_members','buddyforms_metabox_class');
 }
+
 
 // Form Builder Sidebar Metabox Content
 function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
