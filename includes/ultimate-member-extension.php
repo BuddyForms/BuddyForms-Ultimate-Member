@@ -3,7 +3,7 @@
 // Add a custom tabs to the profile
 add_filter( 'um_profile_tabs', 'bf_profile_tabs', 1000 );
 function bf_profile_tabs( $tabs ) {
-	global $buddyforms, $bf_um_tabs;
+	global $buddyforms, $bf_um_tabs, $bf_um_form_slug;
 
 	// run thrue all forms and check if they should get integrated
 	if ( isset( $buddyforms ) && is_array( $buddyforms ) ) : foreach ( $buddyforms as $form_slug => $form ) :
@@ -51,8 +51,8 @@ function bf_profile_tabs( $tabs ) {
 			}
 
 			// Hook the content into the coret tabs
-			add_action( 'um_profile_content_' . $parent_tab_slug . '_posts-' . $bf_um_form_slug, create_function( '$args', 'bf_profile_tabs_content(' . $bf_um_form_slug . ');' ) );
-			add_action( 'um_profile_content_' . $parent_tab_slug . '_form-' . $bf_um_form_slug, create_function( '$args', 'bf_profile_tabs_content(' . $bf_um_form_slug . ');' ) );
+			add_action( 'um_profile_content_' . $parent_tab_slug . '_posts-' . $bf_um_form_slug, 'bf_profile_tabs_content' );
+			add_action( 'um_profile_content_' . $parent_tab_slug . '_form-' . $bf_um_form_slug, 'bf_profile_tabs_content' );
 
 		}
 	endforeach; endif;
@@ -64,7 +64,7 @@ function bf_profile_tabs( $tabs ) {
 // Display the Tab Content
 //
 function bf_profile_tabs_content( $bf_um_form_slug ) {
-	global $buddyforms, $bf_um_tabs;
+	global $buddyforms, $bf_um_tabs, $bf_um_form_slug;
 
 	$form_slug = $bf_um_tabs[ $bf_um_form_slug ];
 
