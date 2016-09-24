@@ -123,11 +123,11 @@ function bf_ultimate_member_page_link_router_edit( $link, $id ) {
 	$form_slug  = get_post_meta( $id, '_bf_form_slug', true );
 	$um_options = get_option( 'um_options' );
 
-	if ( ! $form_slug ) {
+	if ( isset( $form_slug ) ) {
 		return $link;
 	}
 
-	if ( ! $buddyforms[ $form_slug ]['ultimate_members_profiles_integration'] ) {
+	if ( isset( $buddyforms[ $form_slug ]['ultimate_members_profiles_integration'] ) ) {
 		return $link;
 	}
 

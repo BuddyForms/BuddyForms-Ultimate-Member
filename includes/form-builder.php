@@ -4,6 +4,8 @@
 function buddyforms_ultimate_members_admin_settings_sidebar_metabox() {
 	add_meta_box( 'buddyforms_ultimate_members', __( "Ultimate Members", 'buddyforms' ), 'buddyforms_ultimate_members_admin_settings_sidebar_metabox_html', 'buddyforms', 'normal', 'low' );
 	add_filter('postbox_classes_buddyforms_buddyforms_ultimate_members','buddyforms_metabox_class');
+	add_filter('postbox_classes_buddyforms_buddyforms_ultimate_members','buddyforms_metabox_hide_if_form_type_register');
+	add_filter('postbox_classes_buddyforms_buddyforms_ultimate_members','buddyforms_metabox_show_if_attached_page');
 }
 
 
