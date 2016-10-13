@@ -141,4 +141,4 @@ function bf_ultimate_member_page_link_router_edit( $link, $id ) {
 	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . $link_href . '">' . __( 'Edit', 'buddyforms' ) . '</a>';
 }
 
-add_filter( 'bf_loop_edit_post_link', 'bf_ultimate_member_page_link_router_edit', 10, 2 );
+add_filter( 'buddyforms_loop_edit_post_link', 'bf_ultimate_member_page_link_router_edit', 10, 2 );
