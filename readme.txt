@@ -1,10 +1,10 @@
 === BuddyForms Ultimate Member ===
 Contributors: svenl77, buddyforms
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
-Requires at least: WordPress 4.0
-Tested up to: WordPress 4.5.2
+Requires at least: 3.9
+Tested up to: 4.6.1
 License: GPLv2 or later
-Stable tag: 1.0
+Stable tag: 1.0.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs, group Forms. Works with any PostType Plugin and Theme.
@@ -107,6 +107,16 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+
+= 1.0.1 =
+Hooks rename session
+Add the buddyforms_metabox_class class to the postmetabox to make sure it get displayed.
+Prevent Ultimate Member from flush rewrite roles with every page load.
+Add inline documentation
+Add a check if $buddyforms is an array to avoid undefined index issues
+There was an issue in the profile if the form slug has a "-" I have fixed this by add a global $bf_um_tabs to save the form slug without "-"
+Add new parameter to the list posts shortcode to display the correct posts. There was a issue displaying always the logged in user posts.
+code cleanup
 
 = 1.0 =
 * Final Version
