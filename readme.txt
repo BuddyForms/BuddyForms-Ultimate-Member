@@ -1,5 +1,5 @@
 === BuddyForms Ultimate Member ===
-Contributors: svenl77, buddyforms
+Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
 Tested up to: 4.6.1
@@ -11,9 +11,7 @@ Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an 
 
 == Description ==
 
-This is the BuddyForms Ultimate Member Extension. Integrate your BuddyForms Forms into your Ultimate Member. You need the BuddyForms plugin installed for the plugin to work. <a href="http://buddyforms.com" target="_blank">Get BuddyForms now!</a>
-
-Do you really have the time to be posting and updating your blog everyday? Didn’t think so… <b>BuddyForms Ultimate Member</b>  allows your users to write, edit and upload posts, images, video, & just about any other content to your site, right from their Ultimate Member Profile!
+Do you really have the time to be posting and updating your blog everyday? Didn’t think so… <b>BuddyForms Ultimate Member</b> allows your users to write, edit and upload posts, images, video, & just about any other content to your site, right from their Ultimate Member Profile!
 
 Once you download the plugin, it’s super simple to setup:
 All you have to do is drag-and-drop to build the form your users will be submitting on the front-end.
