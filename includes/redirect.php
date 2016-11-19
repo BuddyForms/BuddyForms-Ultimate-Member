@@ -63,21 +63,32 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 			$current_user = wp_get_current_user();
 			$userdata     = get_userdata( $current_user->ID );
 
+			switch( $um_options['permalink_base'] ){
+				case 'user_login':
+					$user_permalink = $userdata->user_login;
+					break;
+				case 'user_id':
+					$user_permalink = $userdata->ID;
+					break;
+				default:
+					$user_permalink = $userdata->user_login;
+			}
+
 			$link = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab;
 
 			// Check the bf_action action query var and create the Ultimate member url for the correct action
 			if ( isset( $wp_query->query_vars['bf_action'] ) ) {
 				if ( $wp_query->query_vars['bf_action'] == 'create' ) {
-					$link = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug;
+					$link = get_the_permalink( $um_options['core_user'] ) . $user_permalink . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug;
 				}
 				if ( $wp_query->query_vars['bf_action'] == 'edit' ) {
-					$link = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'];
+					$link = get_the_permalink( $um_options['core_user'] ) . $user_permalink . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'];
 				}
 				if ( $wp_query->query_vars['bf_action'] == 'revision' ) {
-					$link = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'] . '&bf_rev_id=' . $wp_query->query_vars['bf_rev_id'];
+					$link = get_the_permalink( $um_options['core_user'] ) . $user_permalink . '?profiletab=' . $parent_tab . '&subnav=form-' . $form_slug . '&bf_post_id=' . $wp_query->query_vars['bf_post_id'] . '&bf_rev_id=' . $wp_query->query_vars['bf_rev_id'];
 				}
 				if ( $wp_query->query_vars['bf_action'] == 'view' ) {
-					$link = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&subnav=posts-' . $form_slug;
+					$link = get_the_permalink( $um_options['core_user'] ) . $user_permalink . '?profiletab=' . $parent_tab . '&subnav=posts-' . $form_slug;
 				}
 
 			}
