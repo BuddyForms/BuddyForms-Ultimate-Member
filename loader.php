@@ -34,15 +34,11 @@ function buddyforms_ultimate_members_init() {
 
 	// Check if BuddyForms is activated
 	if ( ! defined( 'BUDDYFORMS_VERSION' ) ) {
-		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs BuddyForms to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" );' ) );
-
 		return;
 	}
 
 	// Check if Ultimate Member is activated
 	if ( ! class_exists( 'UM_API' ) ) {
-		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Ultimate Members needs Ultimate Members to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "https://ultimatemember.com/" );' ) );
-
 		return;
 	}
 
@@ -53,3 +49,48 @@ function buddyforms_ultimate_members_init() {
 	require( dirname( __FILE__ ) . '/includes/ultimate-member-extension.php' );
 
 }
+
+//
+// Check the plugin dependencies
+//
+add_action('init', function(){
+
+	// Only Check for requirements in the admin
+	if(!is_admin()){
+		return;
+	}
+
+	// Require TGM
+	require ( dirname(__FILE__) . '/includes/resources/tgm/class-tgm-plugin-activation.php' );
+
+	// Hook required plugins function to the tgmpa_register action
+	add_action( 'tgmpa_register', function(){
+
+		// Create the required plugins array
+		$plugins = array(
+			array(
+				'name'              => 'BuddyForms',
+				'slug'              => 'buddyforms',
+				'required'          => true,
+			),
+			array(
+				'name'              => 'Ultimate Member',
+				'slug'              => 'ultimate-member',
+				'required'          => true,
+			),
+		);
+
+		$config = array(
+			'id'           => 'buddyforms-um',         // Unique ID for hashing notices for multiple instances of TGMPA.
+			'parent_slug'  => 'edit.php?post_type=buddyforms',            // Parent menu slug.
+			'capability'   => 'manage_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+			'has_notices'  => true,                    // Show admin notices or not.
+			'dismissable'  => false,                    // If false, a user cannot dismiss the nag message.
+			'is_automatic' => true,                   // Automatically activate plugins after installation or not.
+		);
+
+		// Call the tgmpa function to register the required plugins
+		tgmpa( $plugins, $config );
+
+	} );
+}, 1, 1);
