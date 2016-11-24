@@ -3,7 +3,7 @@
  Plugin Name: BuddyForms Ultimate Member
  Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
  Description: Extend Ultimate Member Profiles with BuddyForms
- Version: 1.0.2
+ Version: 1.0.3
  Author: Sven Lehnert
  Author URI: https://profiles.wordpress.org/svenl77
  License: GPLv2 or later

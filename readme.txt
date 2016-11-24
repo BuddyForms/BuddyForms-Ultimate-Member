@@ -4,7 +4,7 @@ Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form 
 Requires at least: 3.9
 Tested up to: 4.6.1
 License: GPLv2 or later
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs, group Forms. Works with any PostType Plugin and Theme.
@@ -105,6 +105,9 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+
+= 1.0.3 =
+Add dependencies management with tgm
 
 = 1.0.2 =
 fixed an issue with the user url structure rewrite. It only worked if the Profile Permalink Base was set to user. Should work now with all settings
