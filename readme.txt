@@ -4,7 +4,7 @@ Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form 
 Requires at least: 3.9
 Tested up to: 4.6.1
 License: GPLv2 or later
-Stable tag: 1.0.3
+Stable tag: 1.0.3.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -92,7 +92,7 @@ BuddyForms and Ultimate Member
 == Changelog ==
 
 = 1.0.3.1 =
-Fixed an issue with the dependencies management. If pro was activated it still ask for the free. Fixed now with a new default in the core to chaeck if the pro is active.
+Fixed an issue with the dependencies management. If pro was activated it still ask for the free. Fixed now with a new default in the core to check if the pro is active.
 
 = 1.0.3 =
 Add dependencies management with tgm
