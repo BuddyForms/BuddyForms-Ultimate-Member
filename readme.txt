@@ -7,49 +7,34 @@ License: GPLv2 or later
 Stable tag: 1.0.3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs, group Forms. Works with any PostType Plugin and Theme.
+Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
 
 == Description ==
 
-Do you really have the time to be posting and updating your blog everyday? Didn’t think so… <b>BuddyForms Ultimate Member</b> allows your users to write, edit and upload posts, images, video, & just about any other content to your site, right from their Ultimate Member Profile!
+BuddyForms Ultimate Member allows your users to write, edit and upload posts, images, video, & just about any other content to your site, right from their Ultimate Member Profile!
 
-Once you download the plugin, it’s super simple to setup:
-All you have to do is drag-and-drop to build the form your users will be submitting on the front-end.
+Once you download the plugin, it’s super simple to setup All you have to do is drag-and-drop to build the form your users will be submitting on the front-end.
 
-<h4>...with full moderation and revision control feature.</h4>
-It doesn’t matter how complex or big your site is, BuddyForms can handle ALL of your user-generated content.
-
-Build forms with an easy Form Builder. The easy way to bring your existing plugins into the Ultimate Member ecosystem and make it accessible for your users right from their profile.
+<h4>Works with your existing Plugins</h4>
+The easy way to bring your existing plugins into the Ultimate Member ecosystem and make it accessible for your users right from their profile.
 
 <h4>For Any Post Type </h4>
-Choose which post type should be created when users submit your form.
-Turn any custom-post-type based WordPress plugin into a collaborative publishing tool and let your users do the dirty work of adding content for you! Perfect for online magazines, blogs, directories, stores, marketplaces, FAQ’s… you name it.
-Easy Form Builder
+Choose which post type should be created when users submit your form. Turn any custom-post-type based WordPress plugin into a collaborative publishing tool and let your users adding content!
+
+<h4>Perfect for </h4>
+Online Magazines, Blogs, Directories, Stores, Marketplaces, FAQ’s… you name it.
+
+<h4>Easy Form Builder</h4>
 Create and customize forms on the fly with easy drag and drop editing. No coding necessary.
 
-You get all the necessary elements like Text Fields, Email Input, Checkboxes, Dropdowns and more.
+<h4>Moderation</h4>
+Moderate new Posts. Allow your users to create new versions of there posts and resent them to review without hiding the published post.
+
 <h4>Form Elements</h4>
-The custom form builder provides the following elements to create your custom post forms:
+You get all the necessary elements like Text Fields, Email Input, Checkboxes, Dropdowns and more.
 
-<b>Classic Fields = Custom Fields</b><br>
-Text Field<br>
-Email Field<br>
-Link Field<br>
-Text Area<br>
-Radio Button<br>
-Checkbox<br>
-Dropdown<br>
-Multi Dropdown<br>
-<br>
-<b>Post Fields</b><br>
-Taxonomy Dropdown<br>
-Hidden<br>
-Turn comments on/off<br>
-Moderation and Revisions<br>
-<br>
-You can choose how your members create, manage and edit their posts. Full control of the publishing process with reviews and revisions.
-
-Adjust the permissions for every form to your needs.
+<h4>Permission<h4>
+You can choose how your members create, manage and edit their posts. Adjust the permissions for every form to your needs.
 
 <h4>Extendable</h4>
 
@@ -59,7 +44,7 @@ Works with:
 <li>WooCommerce Simple Auctions</li>
 <li>Advanced Custom Fields</li>
 <li>Posts 2 Posts</li>
-<li>And many more. See the <a href="https://buddyforms.com/extensions-for-wordpress-forms/" target="_blank">Extensions</a> on the BuddyForms.com site for all available extensions</li>
+<li>And many more. See the <a href="https://themekraft.com/buddyforms/#extensions" target="_blank">Extensions</a> on the BuddyForms.com site for all available extensions</li>
 </ul>
 
 
@@ -105,6 +90,9 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+
+= 1.0.3.1 =
+Fixed an issue with the dependencies management. If pro was activated it still ask for the free. Fixed now with a new default in the core to chaeck if the pro is active.
 
 = 1.0.3 =
 Add dependencies management with tgm
