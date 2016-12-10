@@ -2,7 +2,7 @@
 Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 4.6.1
+Tested up to: 4.7
 License: GPLv2 or later
 Stable tag: 1.0.3.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,7 +33,7 @@ Moderate new Posts. Allow your users to create new versions of there posts and r
 <h4>Form Elements</h4>
 You get all the necessary elements like Text Fields, Email Input, Checkboxes, Dropdowns and more.
 
-<h4>Permission<h4>
+<h4>Permission</h4>
 You can choose how your members create, manage and edit their posts. Adjust the permissions for every form to your needs.
 
 <h4>Extendable</h4>
