@@ -1,11 +1,11 @@
 <?php
 /*
  Plugin Name: BuddyForms Ultimate Member
- Plugin URI: http://buddyforms.com/downloads/buddyforms-ultimatemember/
+ Plugin URI: https://themekraft.com/products/ultimate-member/
  Description: Extend Ultimate Member Profiles with BuddyForms
  Version: 1.0.3.1
- Author: Sven Lehnert
- Author URI: https://profiles.wordpress.org/svenl77
+ Author: ThemeKraft
+ Author URI: https://themekraft.com/buddyforms/
  License: GPLv2 or later
  Network: false
 
