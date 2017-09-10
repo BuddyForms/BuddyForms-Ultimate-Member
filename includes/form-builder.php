@@ -24,9 +24,21 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	// Create an array for the form elements
 	$form_setup = array();
 
+
 	// Get the form element values from the form options array
 	$ultimate_members_profiles_integration = isset( $buddyform['ultimate_members_profiles_integration'] ) ? $buddyform['ultimate_members_profiles_integration'] : '';
 	$ultimate_members_profiles_parent_tab  = isset( $buddyform['ultimate_members_profiles_parent_tab'] ) ? $buddyform['ultimate_members_profiles_parent_tab'] : '';
+
+
+
+
+	if( $buddyform['slug'] == 'posts' && ! empty( $ultimate_members_profiles_integration ) &&
+	    $buddyform['slug'] == 'posts' && empty( $ultimate_members_profiles_parent_tab ) ){
+		$message = __('<font color="#b22222">This Form is Broken!</font> This form slug is "posts". This slug is reserved for the Ultimate Member Posts Tab. You can only Use Attached Page as Parent Tab and make this form a sub tab of the parent. Please check both options', 'buddyforms');
+		$form_setup[] = new Element_HTML('<div class="notice notice-error"><p>' . $message . '</p></div><p><b>' . $message . '</b></p>');
+	}
+
+
 
 	// Add the form elements
 	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add this form as Profile Tab', 'buddyforms' ) . "</b>", "buddyforms_options[ultimate_members_profiles_integration]", array( "integrate" => "Integrate this Form" ), array( 'value'     => $ultimate_members_profiles_integration,
