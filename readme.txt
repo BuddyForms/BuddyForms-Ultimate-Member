@@ -2,9 +2,9 @@
 Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 4.7.3
+Tested up to: 4.8.1
 License: GPLv2 or later
-Stable tag: 1.0.4
+Stable tag: 1.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -91,27 +91,37 @@ BuddyForms and Ultimate Member
 
 == Changelog ==
 
+
+1.1
+* Fixed an issue if multiple forms used in different tabs with the same post type the tab default got broken
+* Changed the logic to add multi tab support
+* If form slug is posts the form conflicts with the default tab "posts" and only can be use with the option "Use Attached Page as Parent Tab and make this form a sub tab of the parent"
+* Fixed all issues reported by users
+* Add an admin notice to the form builder in the metabox and above the update form
+    --> This form slug is "posts". This slug is reserved for the Ultimate Member Posts Tab. You can only Use Attached Page as Parent Tab and make this form a sub tab of the parent. Please check both options
+* Optimised and clean up the code
+
 = 1.0.4 =
-Freemius Integration
+* Freemius Integration
 
 = 1.0.3.1 =
-Fixed an issue with the dependencies management. If pro was activated it still ask for the free. Fixed now with a new default in the core to check if the pro is active.
+* Fixed an issue with the dependencies management. If pro was activated it still ask for the free. Fixed now with a new default in the core to check if the pro is active.
 
 = 1.0.3 =
-Add dependencies management with tgm
+* Add dependencies management with tgm
 
 = 1.0.2 =
-fixed an issue with the user url structure rewrite. It only worked if the Profile Permalink Base was set to user. Should work now with all settings
+* fixed an issue with the user url structure rewrite. It only worked if the Profile Permalink Base was set to user. Should work now with all settings
 
 = 1.0.1 =
-Hooks rename session
-Add the buddyforms_metabox_class class to the postmetabox to make sure it get displayed.
-Prevent Ultimate Member from flush rewrite roles with every page load.
-Add inline documentation
-Add a check if $buddyforms is an array to avoid undefined index issues
-There was an issue in the profile if the form slug has a "-" I have fixed this by add a global $bf_um_tabs to save the form slug without "-"
-Add new parameter to the list posts shortcode to display the correct posts. There was a issue displaying always the logged in user posts.
-code cleanup
+* Hooks rename session
+* Add the buddyforms_metabox_class class to the postmetabox to make sure it get displayed.
+* Prevent Ultimate Member from flush rewrite roles with every page load.
+* Add inline documentation
+* Add a check if $buddyforms is an array to avoid undefined index issues
+* There was an issue in the profile if the form slug has a "-" I have fixed this by add a global $bf_um_tabs to save the form slug without "-"
+* Add new parameter to the list posts shortcode to display the correct posts. There was a issue displaying always the logged in user posts.
+* code cleanup
 
 = 1.0 =
 * Final Version

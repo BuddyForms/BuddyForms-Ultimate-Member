@@ -30,7 +30,7 @@ function bf_profile_tabs( $tabs ) {
 					'custom' => true
 				);
 				$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;
-				$bf_um_tabs = $tabs;
+				$bf_um_tabs                                 = $tabs;
 
 				add_action( 'um_profile_content_' . $parent_tab_slug . '_default', 'bf_profile_tabs_content', 1, 10 );
 
@@ -39,7 +39,7 @@ function bf_profile_tabs( $tabs ) {
 			$tab_name = ! empty( $form['singular_name'] ) ? $form['singular_name'] : $form['name'];
 
 			// Add the Subtabs to the Ultimate Member Menue
-			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = __( 'View ' . $tab_name , 'buddyforms' );
+			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = __( 'View ' . $tab_name, 'buddyforms' );
 
 			// Add the Subtab for the create only if diplayd profil is from loged in user.
 			if ( um_is_user_himself() ) {
@@ -57,6 +57,7 @@ function bf_profile_tabs( $tabs ) {
 	endforeach; endif;
 
 	$bf_um_tabs = $tabs;
+
 	return $tabs;
 }
 
@@ -66,7 +67,7 @@ function bf_profile_tabs( $tabs ) {
 function bf_profile_tabs_content( $subnav_defalt ) {
 	global $bf_um_tabs;
 
-	if( ! isset( $_GET['profiletab'] ) ) {
+	if ( ! isset( $_GET['profiletab'] ) ) {
 		return;
 	};
 	$parent_tab = $_GET['profiletab'];
@@ -75,10 +76,10 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 
 	$subnav_slug = isset( $_GET['subnav'] ) ? $_GET['subnav'] : $subnav_slug_default;
 
-	$form_slug = strstr($subnav_slug, '-');
-	$form_slug = substr($form_slug, 1);
+	$form_slug = strstr( $subnav_slug, '-' );
+	$form_slug = substr( $form_slug, 1 );
 
-	$profiletab_type = explode('-', $subnav_slug );
+	$profiletab_type = explode( '-', $subnav_slug );
 	$profiletab_type = $profiletab_type[0];
 
 	// Check if the ultimate member view is a form view and add the coret content

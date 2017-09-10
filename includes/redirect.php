@@ -63,7 +63,7 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 			$current_user = wp_get_current_user();
 			$userdata     = get_userdata( $current_user->ID );
 
-			switch( $um_options['permalink_base'] ){
+			switch ( $um_options['permalink_base'] ) {
 				case 'user_login':
 					$user_permalink = $userdata->user_login;
 					break;
