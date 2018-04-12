@@ -39,7 +39,7 @@ function bf_ultimate_member_parent_tab( $member_form ) {
 // Prevent Ultimate Member from flush rewrite roles bei every page load.
 // @todo: Rewrite roles should get flushed by every option save form Ultimate Member
 //
-add_filter( 'um_rewrite_flush_rewrite_rules', 'buddyforms_um_rewrite_flush_rewrite_rules' );
+// add_filter( 'um_rewrite_flush_rewrite_rules', 'buddyforms_um_rewrite_flush_rewrite_rules' );
 function buddyforms_um_rewrite_flush_rewrite_rules() {
 	return true;
 }

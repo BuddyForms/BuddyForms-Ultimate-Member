@@ -30,12 +30,13 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	$ultimate_members_profiles_parent_tab  = isset( $buddyform['ultimate_members_profiles_parent_tab'] ) ? $buddyform['ultimate_members_profiles_parent_tab'] : '';
 
 
-	if ( $buddyform['slug'] == 'posts' && ! empty( $ultimate_members_profiles_integration ) &&
-	     $buddyform['slug'] == 'posts' && empty( $ultimate_members_profiles_parent_tab ) ) {
-		$message      = __( '<font color="#b22222">This Form is Broken!</font> This form slug is "posts". This slug is reserved for the Ultimate Member Posts Tab. You can only Use Attached Page as Parent Tab and make this form a sub tab of the parent. Please check both options', 'buddyforms' );
-		$form_setup[] = new Element_HTML( '<div class="notice notice-error"><p>' . $message . '</p></div><p><b>' . $message . '</b></p>' );
+	if( isset($buddyform['slug']) ){
+		if ( $buddyform['slug'] == 'posts' && ! empty( $ultimate_members_profiles_integration ) &&
+		     $buddyform['slug'] == 'posts' && empty( $ultimate_members_profiles_parent_tab ) ) {
+			$message      = __( '<font color="#b22222">This Form is Broken!</font> This form slug is "posts". This slug is reserved for the Ultimate Member Posts Tab. You can only Use Attached Page as Parent Tab and make this form a sub tab of the parent. Please check both options', 'buddyforms' );
+			$form_setup[] = new Element_HTML( '<div class="notice notice-error"><p>' . $message . '</p></div><p><b>' . $message . '</b></p>' );
+		}
 	}
-
 
 	// Add the form elements
 	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add this form as Profile Tab', 'buddyforms' ) . "</b>", "buddyforms_options[ultimate_members_profiles_integration]", array( "integrate" => "Integrate this Form" ), array(
@@ -47,12 +48,31 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 		'shortDesc' => __( 'Many Forms can have the same attached Page. All Forms with the same page with page as parent enabled will be listed as sub forms. This why you can group forms.', 'buddyforms' )
 	) );
 
-	// Loop thrue all form elements and echo the content
-	foreach ( $form_setup as $key => $field ) {
-		echo '<div class="buddyforms_field_label">' . $field->getLabel() . '</div>';
-		echo '<div class="buddyforms_field_description">' . $field->getShortDesc() . '</div>';
-		echo '<div class="buddyforms_form_field">' . $field->render() . '</div>';
+
+	$um_profile_visibility = isset( $buddyform['um_profile_visibility'] ) ? $buddyform['um_profile_visibility'] : 'private';
+	$element = new Element_Select( "<br><b>" . __( 'Visibility', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_visibility]", array( "private"        => "Private - Only the logged in member in his profile.",
+	                                                                                                                                            "logged_in_user" => "Community - Logged in user can see other users profile posts",
+	                                                                                                                                            "any"            => "Public Visible - Unregistered users can see user profile posts"
+	), array( 'value'     => $um_profile_visibility,
+	          'shortDesc' => __( 'Who can see submissions in Profiles?', 'buddyforms' )
+	) );
+	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
+		$element->setAttribute( 'disabled', 'disabled' );
 	}
+	$form_setup[] = $element;
+
+
+	$um_profile_menu_label = isset( $buddyform['um_profile_visibility'] ) ? $buddyform['um_profile_menu_label'] : '';
+	$element = new Element_Textbox( "<br><b>" . __( 'Label', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_label]", array( 'value'     => $um_profile_menu_label,
+	          'shortDesc' => __( 'Profile Tab Label', 'buddyforms' )
+	) );
+	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
+		$element->setAttribute( 'disabled', 'disabled' );
+	}
+	$form_setup[] = $element;
+
+	buddyforms_display_field_group_table( $form_setup );
+
 }
 
 add_filter( 'add_meta_boxes', 'buddyforms_ultimate_members_admin_settings_sidebar_metabox' );

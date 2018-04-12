@@ -9,11 +9,35 @@ function bf_profile_tabs( $tabs ) {
 	if ( isset( $buddyforms ) && is_array( $buddyforms ) ) : foreach ( $buddyforms as $form_slug => $form ) :
 		if ( isset( $form['ultimate_members_profiles_integration'] ) ) {
 
+
+			$show = false;
+			if( $form['um_profile_visibility'] == 'logged_in_user' && is_user_logged_in() ){
+				$show = true;
+			}
+
+			if( $form['um_profile_visibility'] == 'private' &&  is_user_logged_in() && um_is_user_himself() ){
+				$show = true;
+			}
+
+			if( $form['um_profile_visibility'] == 'any'){
+				$show = true;
+			}
+
+			if( ! $show ){
+				continue;
+			}
+
+
 			// Set the Tap slug
 			$parent_tab_slug = bf_ultimate_member_parent_tab( $form );
 
+
 			// Set the Tab name
 			$parent_tab_name = $form['name'];
+
+			if( ! empty( $form['um_profile_menu_label'] ) ){
+				$parent_tab_name = $form['um_profile_menu_label'];
+			}
 
 			// Check if the form has a parent tap and use the parent tab name instad the from name
 			if ( isset( $form['ultimate_members_profiles_integration'] ) && isset( $form['ultimate_members_profiles_parent_tab'] ) ) {
@@ -88,7 +112,7 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 		if ( isset( $subnav_slug ) && $profiletab_type == 'posts' ) {
 
 			// Display the posts
-			echo do_shortcode( '[buddyforms_the_loop form_slug="' . $form_slug . '" author="' . um_profile_id() . '"]' );
+			echo do_shortcode( '[buddyforms_the_loop query_option="list_all" user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . um_profile_id() . '"]' );
 
 		} elseif ( isset( $_GET['subnav'] ) && $profiletab_type == 'form' ) {
 

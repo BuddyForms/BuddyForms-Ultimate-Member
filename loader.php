@@ -3,7 +3,7 @@
  Plugin Name: BuddyForms Ultimate Member
  Plugin URI: https://themekraft.com/products/ultimate-member/
  Description: Extend Ultimate Member Profiles with BuddyForms
- Version: 1.1
+ Version: 1.2
  Author: ThemeKraft
  Author URI: https://themekraft.com/buddyforms/
  License: GPLv2 or later
@@ -38,7 +38,7 @@ function buddyforms_ultimate_members_init() {
 	}
 
 	// Check if Ultimate Member is activated
-	if ( ! class_exists( 'UM_API' ) ) {
+	if ( ! class_exists( 'UM' ) ) {
 		return;
 	}
 
@@ -102,10 +102,10 @@ add_action( 'init', function () {
 }, 1, 1 );
 
 // Create a helper function for easy SDK access.
-function bum_fs() {
-	global $bum_fs;
+function buddyforms_um_fs() {
+	global $buddyforms_um_fs;
 
-	if ( ! isset( $bum_fs ) ) {
+	if ( ! isset( $buddyforms_um_fs ) ) {
 		// Include Freemius SDK.
 		if ( file_exists( dirname( dirname( __FILE__ ) ) . '/buddyforms/includes/resources/freemius/start.php' ) ) {
 			// Try to load SDK from parent plugin folder.
@@ -113,45 +113,56 @@ function bum_fs() {
 		} else if ( file_exists( dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php' ) ) {
 			// Try to load SDK from premium parent plugin folder.
 			require_once dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php';
-		} else {
-			require_once dirname( __FILE__ ) . '/includes/resources/freemius/start.php';
 		}
 
-		$bum_fs = fs_dynamic_init( array(
-			'id'             => '961',
-			'slug'           => 'buddyforms-ultimate-member',
-			'type'           => 'plugin',
-			'public_key'     => 'pk_665b8cfafdebbc7171dd9b787e770',
-			'is_premium'     => false,
-			'has_paid_plans' => false,
-			'parent'         => array(
+		$buddyforms_um_fs = fs_dynamic_init( array(
+			'id'                  => '961',
+			'slug'                => 'buddyforms-ultimate-member',
+			'type'                => 'plugin',
+			'public_key'          => 'pk_665b8cfafdebbc7171dd9b787e770',
+			'is_premium'          => true,
+			// If your addon is a serviceware, set this option to false.
+			'has_premium_version' => true,
+			'has_paid_plans'      => true,
+			'trial'               => array(
+				'days'               => 14,
+				'is_require_payment' => true,
+			),
+			'parent'              => array(
 				'id'         => '391',
 				'slug'       => 'buddyforms',
 				'public_key' => 'pk_dea3d8c1c831caf06cfea10c7114c',
 				'name'       => 'BuddyForms',
 			),
-			'menu'           => array(
-				'slug'       => 'edit.php?post_type=buddyforms',
-				'first-path' => 'edit.php?post_type=buddyforms&page=buddyforms_welcome_screen',
-				'support'    => false,
+			'menu'                => array(
+				'slug'           => 'edit.php?post_type=buddyforms',
+				'first-path'     => 'edit.php?post_type=buddyforms&page=buddyforms_welcome_screen',
+				'support'        => false,
 			),
+			// Set the SDK to work in a sandbox mode (for development & testing).
+			// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+			'secret_key'          => 'sk_G>msoclc9xO#YCKhVVl4#6$V*p++I',
 		) );
 	}
 
-	return $bum_fs;
+	return $buddyforms_um_fs;
 }
-
-function bum_fs_is_parent_active_and_loaded() {
+function buddyforms_um_fs_is_parent_active_and_loaded() {
 	// Check if the parent's init SDK method exists.
 	return function_exists( 'buddyforms_core_fs' );
 }
 
-function bum_fs_is_parent_active() {
-	$active_plugins_basenames = get_option( 'active_plugins' );
+function buddyforms_um_fs_is_parent_active() {
+	$active_plugins = get_option( 'active_plugins', array() );
 
-	foreach ( $active_plugins_basenames as $plugin_basename ) {
-		if ( 0 === strpos( $plugin_basename, 'buddyforms/' ) ||
-		     0 === strpos( $plugin_basename, 'buddyforms-premium/' )
+	if ( is_multisite() ) {
+		$network_active_plugins = get_site_option( 'active_sitewide_plugins', array() );
+		$active_plugins         = array_merge( $active_plugins, array_keys( $network_active_plugins ) );
+	}
+
+	foreach ( $active_plugins as $basename ) {
+		if ( 0 === strpos( $basename, 'buddyforms/' ) ||
+		     0 === strpos( $basename, 'buddyforms-premium/' )
 		) {
 			return true;
 		}
@@ -160,10 +171,10 @@ function bum_fs_is_parent_active() {
 	return false;
 }
 
-function bum_fs_init() {
-	if ( bum_fs_is_parent_active_and_loaded() ) {
+function buddyforms_um_fs_init() {
+	if ( buddyforms_um_fs_is_parent_active_and_loaded() ) {
 		// Init Freemius.
-		bum_fs();
+		buddyforms_um_fs();
 
 		// Parent is active, add your init code here.
 	} else {
@@ -171,13 +182,13 @@ function bum_fs_init() {
 	}
 }
 
-if ( bum_fs_is_parent_active_and_loaded() ) {
+if ( buddyforms_um_fs_is_parent_active_and_loaded() ) {
 	// If parent already included, init add-on.
-	bum_fs_init();
-} else if ( bum_fs_is_parent_active() ) {
+	buddyforms_um_fs_init();
+} else if ( buddyforms_um_fs_is_parent_active() ) {
 	// Init add-on only after the parent is loaded.
-	add_action( 'buddyforms_core_fs_loaded', 'bum_fs_init' );
+	add_action( 'buddyforms_core_fs_loaded', 'buddyforms_um_fs_init' );
 } else {
 	// Even though the parent is not activated, execute add-on for activation / uninstall hooks.
-	bum_fs_init();
+	buddyforms_um_fs_init();
 }

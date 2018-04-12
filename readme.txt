@@ -2,9 +2,9 @@
 Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 4.8.1
+Tested up to: 4.9
 License: GPLv2 or later
-Stable tag: 1.1
+Stable tag: 1.2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -91,6 +91,14 @@ BuddyForms and Ultimate Member
 
 == Changelog ==
 
+
+1.2
+* Rebuild all to work with UM Version 2
+* Added new premium features
+* Added new options for viability and labels
+* Added UM extension support
+* Add new translation strings
+* Removed the old freemius integration and add the parent code
 
 1.1
 * Fixed an issue if multiple forms used in different tabs with the same post type the tab default got broken
