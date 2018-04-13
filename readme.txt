@@ -91,8 +91,11 @@ BuddyForms and Ultimate Member
 
 == Changelog ==
 
+= 1.2.1 =
+* Added new option for the menu icon
+* Fixed some smaller issues 
 
-1.2
+= 1.2 =
 * Rebuild all to work with UM Version 2
 * Added new premium features
 * Added new options for viability and labels
@@ -100,7 +103,7 @@ BuddyForms and Ultimate Member
 * Add new translation strings
 * Removed the old freemius integration and add the parent code
 
-1.1
+= 1.1 =
 * Fixed an issue if multiple forms used in different tabs with the same post type the tab default got broken
 * Changed the logic to add multi tab support
 * If form slug is posts the form conflicts with the default tab "posts" and only can be use with the option "Use Attached Page as Parent Tab and make this form a sub tab of the parent"
