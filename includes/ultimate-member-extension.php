@@ -34,9 +34,13 @@ function bf_profile_tabs( $tabs ) {
 
 			// Set the Tab name
 			$parent_tab_name = $form['name'];
-
 			if( ! empty( $form['um_profile_menu_label'] ) ){
 				$parent_tab_name = $form['um_profile_menu_label'];
+			}
+
+			$icon = 'um-faicon-pencil';
+			if( ! empty( $form['um_profile_menu_icon'] ) ){
+				$icon = $form['um_profile_menu_icon'];
 			}
 
 			// Check if the form has a parent tap and use the parent tab name instad the from name
@@ -50,7 +54,7 @@ function bf_profile_tabs( $tabs ) {
 			if ( ! isset( $tabs[ $parent_tab_slug ] ) ) {
 				$tabs[ $parent_tab_slug ]                   = array(
 					'name'   => $parent_tab_name,
-					'icon'   => 'um-faicon-pencil',
+					'icon'   => $icon,
 					'custom' => true
 				);
 				$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;

@@ -62,9 +62,18 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	$form_setup[] = $element;
 
 
-	$um_profile_menu_label = isset( $buddyform['um_profile_visibility'] ) ? $buddyform['um_profile_menu_label'] : '';
+	$um_profile_menu_label = isset( $buddyform['um_profile_menu_label'] ) ? $buddyform['um_profile_menu_label'] : '';
 	$element = new Element_Textbox( "<br><b>" . __( 'Label', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_label]", array( 'value'     => $um_profile_menu_label,
-	          'shortDesc' => __( 'Profile Tab Label', 'buddyforms' )
+	                                                                                                                                      'shortDesc' => __( 'Profile Tab Label', 'buddyforms' )
+	) );
+	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
+		$element->setAttribute( 'disabled', 'disabled' );
+	}
+	$form_setup[] = $element;
+
+	$um_profile_menu_icon = isset( $buddyform['um_profile_menu_icon'] ) ? $buddyform['um_profile_menu_icon'] : 'um-faicon-pencil';
+	$element = new Element_Textbox( "<br><b>" . __( 'Menu Icon', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_icon]", array( 'value'     => $um_profile_menu_icon,
+	                                                                                                                                      'shortDesc' => __( 'Ultimate Member profile menu item. List off all <a href="https://gist.github.com/plusplugins/b504b6851cb3a8a6166585073f3110dd" target="_blank">UM Favicon Icons</a>', 'buddyforms' )
 	) );
 	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
 		$element->setAttribute( 'disabled', 'disabled' );
