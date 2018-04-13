@@ -4,7 +4,7 @@ Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form 
 Requires at least: 3.9
 Tested up to: 4.9
 License: GPLv2 or later
-Stable tag: 1.2
+Stable tag: 1.2.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -93,7 +93,7 @@ BuddyForms and Ultimate Member
 
 = 1.2.1 =
 * Added new option for the menu icon
-* Fixed some smaller issues 
+* Fixed some smaller issues
 
 = 1.2 =
 * Rebuild all to work with UM Version 2
