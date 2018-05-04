@@ -67,13 +67,13 @@ function bf_profile_tabs( $tabs ) {
 			$tab_name = ! empty( $form['singular_name'] ) ? $form['singular_name'] : $form['name'];
 
 			// Add the Subtabs to the Ultimate Member Menue
-			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = __( 'View ' . $tab_name, 'buddyforms' );
+			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = __( 'View ', 'buddyforms' ) . $tab_name;
 
 			// Add the Subtab for the create only if diplayd profil is from loged in user.
 			if ( um_is_user_himself() ) {
 				// Check if the user has the needed rights
 				if ( current_user_can( 'buddyforms_' . $form_slug . '_create' ) ) {
-					$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = __( 'Create ' . $tab_name, 'buddyforms' );
+					$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = __( 'Create ', 'buddyforms' ) . $tab_name;
 				}
 			}
 
