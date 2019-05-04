@@ -30,7 +30,7 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	$ultimate_members_profiles_parent_tab  = isset( $buddyform['ultimate_members_profiles_parent_tab'] ) ? $buddyform['ultimate_members_profiles_parent_tab'] : '';
 
 
-	if( isset($buddyform['slug']) ){
+	if ( isset( $buddyform['slug'] ) ) {
 		if ( $buddyform['slug'] == 'posts' && ! empty( $ultimate_members_profiles_integration ) &&
 		     $buddyform['slug'] == 'posts' && empty( $ultimate_members_profiles_parent_tab ) ) {
 			$message      = __( '<font color="#b22222">This Form is Broken!</font> This form slug is "posts". This slug is reserved for the Ultimate Member Posts Tab. You can only Use Attached Page as Parent Tab and make this form a sub tab of the parent. Please check both options', 'buddyforms' );
@@ -50,11 +50,13 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 
 
 	$um_profile_visibility = isset( $buddyform['um_profile_visibility'] ) ? $buddyform['um_profile_visibility'] : 'private';
-	$element = new Element_Select( "<br><b>" . __( 'Visibility', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_visibility]", array( "private"        => "Private - Only the logged in member in his profile.",
-	                                                                                                                                            "logged_in_user" => "Community - Logged in user can see other users profile posts",
-	                                                                                                                                            "any"            => "Public Visible - Unregistered users can see user profile posts"
-	), array( 'value'     => $um_profile_visibility,
-	          'shortDesc' => __( 'Who can see submissions in Profiles?', 'buddyforms' )
+	$element               = new Element_Select( "<br><b>" . __( 'Visibility', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_visibility]", array(
+		"private"        => "Private - Only the logged in member in his profile.",
+		"logged_in_user" => "Community - Logged in user can see other users profile posts",
+		"any"            => "Public Visible - Unregistered users can see user profile posts"
+	), array(
+		'value'     => $um_profile_visibility,
+		'shortDesc' => __( 'Who can see submissions in Profiles?', 'buddyforms' )
 	) );
 	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
 		$element->setAttribute( 'disabled', 'disabled' );
@@ -63,8 +65,9 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 
 
 	$um_profile_menu_label = isset( $buddyform['um_profile_menu_label'] ) ? $buddyform['um_profile_menu_label'] : '';
-	$element = new Element_Textbox( "<br><b>" . __( 'Label', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_label]", array( 'value'     => $um_profile_menu_label,
-	                                                                                                                                      'shortDesc' => __( 'Profile Tab Label', 'buddyforms' )
+	$element               = new Element_Textbox( "<br><b>" . __( 'Label', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_label]", array(
+		'value'     => $um_profile_menu_label,
+		'shortDesc' => __( 'Profile Tab Label', 'buddyforms' )
 	) );
 	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
 		$element->setAttribute( 'disabled', 'disabled' );
@@ -72,8 +75,9 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	$form_setup[] = $element;
 
 	$um_profile_menu_icon = isset( $buddyform['um_profile_menu_icon'] ) ? $buddyform['um_profile_menu_icon'] : 'um-faicon-pencil';
-	$element = new Element_Textbox( "<br><b>" . __( 'Menu Icon', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_icon]", array( 'value'     => $um_profile_menu_icon,
-	                                                                                                                                      'shortDesc' => __( 'Ultimate Member profile menu item. List off all <a href="https://gist.github.com/plusplugins/b504b6851cb3a8a6166585073f3110dd" target="_blank">UM Favicon Icons</a>', 'buddyforms' )
+	$element              = new Element_Textbox( "<br><b>" . __( 'Menu Icon', 'buddyforms' ) . "</b>", "buddyforms_options[um_profile_menu_icon]", array(
+		'value'     => $um_profile_menu_icon,
+		'shortDesc' => __( 'Ultimate Member profile menu item. List off all <a href="https://gist.github.com/plusplugins/b504b6851cb3a8a6166585073f3110dd" target="_blank">UM Favicon Icons</a>', 'buddyforms' )
 	) );
 	if ( buddyforms_um_fs()->is_not_paying() && ! buddyforms_um_fs()->is_trial() ) {
 		$element->setAttribute( 'disabled', 'disabled' );

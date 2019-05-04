@@ -11,19 +11,19 @@ function bf_profile_tabs( $tabs ) {
 
 
 			$show = false;
-			if( $form['um_profile_visibility'] == 'logged_in_user' && is_user_logged_in() ){
+			if ( $form['um_profile_visibility'] == 'logged_in_user' && is_user_logged_in() ) {
 				$show = true;
 			}
 
-			if( $form['um_profile_visibility'] == 'private' &&  is_user_logged_in() && um_is_user_himself() ){
+			if ( $form['um_profile_visibility'] == 'private' && is_user_logged_in() && um_is_user_himself() ) {
 				$show = true;
 			}
 
-			if( $form['um_profile_visibility'] == 'any'){
+			if ( $form['um_profile_visibility'] == 'any' ) {
 				$show = true;
 			}
 
-			if( ! $show ){
+			if ( ! $show ) {
 				continue;
 			}
 
@@ -34,12 +34,12 @@ function bf_profile_tabs( $tabs ) {
 
 			// Set the Tab name
 			$parent_tab_name = $form['name'];
-			if( ! empty( $form['um_profile_menu_label'] ) ){
+			if ( ! empty( $form['um_profile_menu_label'] ) ) {
 				$parent_tab_name = $form['um_profile_menu_label'];
 			}
 
 			$icon = 'um-faicon-pencil';
-			if( ! empty( $form['um_profile_menu_icon'] ) ){
+			if ( ! empty( $form['um_profile_menu_icon'] ) ) {
 				$icon = $form['um_profile_menu_icon'];
 			}
 
