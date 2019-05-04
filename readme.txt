@@ -91,6 +91,10 @@ BuddyForms and Ultimate Member
 
 == Changelog ==
 
+= 1.2.3 =
+Make the plugin compatible with WordPress 5.2
+Clean up and Improve the code.
+
 = 1.2.2 =
 Added Text Domain: buddyforms and make all strings like "create" and "view" translatable
 
