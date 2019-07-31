@@ -55,8 +55,8 @@ function bf_profile_tabs( $tabs ) {
 				$tabs[ $parent_tab_slug ]                   = array(
 					'name'   => $parent_tab_name,
 					'icon'   => $icon,
-					'custom' => true
-				);
+                    'default_privacy'   => 3
+                );
 				$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;
 				$bf_um_tabs                                 = $tabs;
 

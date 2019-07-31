@@ -32,7 +32,7 @@ function bf_ultimate_member_parent_tab( $member_form ) {
 		$parent_tab_name = $parent_tab_page->post_name;
 	}
 
-	return $parent_tab_name;
+    return str_replace('-', '', $parent_tab_name);
 }
 
 //
