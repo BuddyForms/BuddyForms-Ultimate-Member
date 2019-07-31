@@ -43,3 +43,65 @@ function bf_ultimate_member_parent_tab( $member_form ) {
 function buddyforms_um_rewrite_flush_rewrite_rules() {
 	return true;
 }
+
+
+add_action( 'buddyforms_process_submission_end', 'buddyforms_um_add_new_submissions_to_the_um_activity_component' );
+function buddyforms_um_add_new_submissions_to_the_um_activity_component( $args ) {
+	global $buddyforms;
+
+	$post_id   = $args['post_id'];
+	$form_slug = $args['form_slug'];
+
+	if ( ! defined( 'um_activity_url' ) ) {
+		return;
+	}
+
+	// Check if form is a sub tab of a parent.
+	if ( ! isset( $buddyforms[ $form_slug ]['ultimate_members_social_activity'] ) ) {
+		return;
+	}
+
+	$post = get_post( $post_id );
+
+	$buddyforms_um_activity = get_post_meta( $post_id, 'buddyforms_um_activity', true );
+	if ( $buddyforms_um_activity == 'published' ) {
+		return;
+	}
+
+	$user_id = $post->post_author;
+
+	um_fetch_user( $user_id );
+	$author_name    = um_user( 'display_name' );
+	$author_profile = um_user_profile_url();
+
+	if ( has_post_thumbnail( $post_id ) ) {
+		$image      = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
+		$post_image = '<span class="post-image"><img src="' . $image[0] . '" alt="" title="" class="um-activity-featured-img" /></span>';
+	} else {
+		$post_image = '';
+	}
+
+	if ( $post->post_content ) {
+		$post_excerpt = '<span class="post-excerpt">' . wp_trim_words( $post->post_content, $num_words = 25, $more = null ) . '</span>';
+	} else {
+		$post_excerpt = '';
+	}
+
+	UM()->Activity_API()->api()->save(
+		array(
+			'template'       => 'new-post',
+			'wall_id'        => $user_id,
+			'related_id'     => $post_id,
+			'author'         => $user_id,
+			'author_name'    => $author_name,
+			'author_profile' => $author_profile,
+			'post_title'     => '<span class="post-title">' . $post->post_title . '</span>',
+			'post_url'       => get_permalink( $post_id ),
+			'post_excerpt'   => $post_excerpt,
+			'post_image'     => $post_image,
+		)
+	);
+
+	update_post_meta( $post_id, 'buddyforms_um_activity', 'published' );
+
+}
