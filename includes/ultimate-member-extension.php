@@ -1,7 +1,9 @@
 <?php
 
 // Add a custom tabs to the profile
-add_filter( 'um_profile_tabs', 'bf_profile_tabs', 1000 );
+add_filter( 'um_profile_tabs', 'bf_profile_tabs', 2000 );
+add_filter( 'um_user_profile_tabs', 'bf_profile_tabs', 2000 );
+
 function bf_profile_tabs( $tabs ) {
 	global $buddyforms, $bf_um_tabs, $bf_um_form_slug;
 
@@ -55,6 +57,7 @@ function bf_profile_tabs( $tabs ) {
 				$tabs[ $parent_tab_slug ]                   = array(
 					'name'   => $parent_tab_name,
 					'icon'   => $icon,
+                    'custom' => true,
                     'default_privacy'   => 3
                 );
 				$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;
@@ -139,3 +142,4 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 		}
 	}
 }
+
