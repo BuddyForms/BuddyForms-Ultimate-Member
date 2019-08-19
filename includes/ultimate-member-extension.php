@@ -71,14 +71,14 @@ function bf_profile_tabs( $tabs ) {
 
 			// Add the Subtabs to the Ultimate Member Menue
 			$tab_view_name = __( 'View ', 'buddyforms' ) . $tab_name;
-			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = apply_filters( 'bf_ultimate_member_view_tab_name', $tab_view_name );
+			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = apply_filters( 'bf_ultimate_member_view_tab_name', $tab_view_name, $form_slug );
 
 			// Add the Subtab for the create only if diplayd profil is from loged in user.
 			if ( um_is_user_himself() ) {
 				// Check if the user has the needed rights
 				if ( current_user_can( 'buddyforms_' . $form_slug . '_create' ) ) {
 					$tab_form_name =  __( 'Create ', 'buddyforms' ) . $tab_name;
-					$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = apply_filters( 'bf_ultimate_member_form_tab_name', $tab_form_name );
+					$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = apply_filters( 'bf_ultimate_member_form_tab_name', $tab_form_name, $form_slug );
 				}
 			}
 
