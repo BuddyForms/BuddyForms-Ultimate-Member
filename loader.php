@@ -1,15 +1,15 @@
 <?php
 /*
- Plugin Name: BuddyForms Ultimate Member
- Plugin URI: https://themekraft.com/products/ultimate-member/
- Description: Extend Ultimate Member Profiles with BuddyForms
- Version: 1.3.2
- Author: ThemeKraft
- Author URI: https://themekraft.com/buddyforms/
- License: GPLv2 or later
- Network: false
- Text Domain: buddyforms
-
+ * Plugin Name: BuddyForms Ultimate Member
+ * Plugin URI: https://themekraft.com/products/ultimate-member/
+ * Description: Extend Ultimate Member Profiles with BuddyForms
+ * Version: 1.3.3
+ * Author: ThemeKraft
+ * Author URI: https://themekraft.com/buddyforms/
+ * License: GPLv2 or later
+ * Network: false
+ * Text Domain: buddyforms
+ * Svn: buddyforms-ultimate-member
  *****************************************************************************
  *
  * This script is free software; you can redistribute it and/or modify
@@ -26,7 +26,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- ****************************************************************************
+ *****************************************************************************
  */
 
 add_action( 'init', 'buddyforms_ultimate_members_init' );
