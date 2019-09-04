@@ -120,8 +120,9 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 
 		if ( isset( $subnav_slug ) && $profiletab_type == 'posts' ) {
 
+			$um_user_id = um_profile_id();
 			// Display the posts
-			echo do_shortcode( '[buddyforms_the_loop query_option="list_all" user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . um_profile_id() . '"]' );
+			echo do_shortcode( '[buddyforms_the_loop user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . $um_user_id . '"]' );
 
 		} elseif ( isset( $_GET['subnav'] ) && $profiletab_type == 'form' ) {
 
