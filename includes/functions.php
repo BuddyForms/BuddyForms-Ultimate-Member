@@ -105,3 +105,10 @@ function buddyforms_um_add_new_submissions_to_the_um_activity_component( $args )
 	update_post_meta( $post_id, 'buddyforms_um_activity', 'published' );
 
 }
+
+add_filter( 'buddyforms_ask_to_become_an_author_url', 'buddyforms_cpublishing_ask_to_become_an_author_url' );
+
+function buddyforms_cpublishing_ask_to_become_an_author_url($url, $user_id){
+	um_fetch_user( $user_id );
+	return um_user_profile_url();
+}

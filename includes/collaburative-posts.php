@@ -14,7 +14,7 @@ function buddyforms_cpublishing_um_add_tab( $tabs ) {
 		'name' 				=> 'Collaborative Posts',
 		'icon' 				=> 'um-faicon-pencil',
 //		'custom' => true,
-		'default_privacy'   => 0,
+		'default_privacy'   => 3,
 	);
 	return $tabs;
 }
