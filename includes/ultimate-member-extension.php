@@ -57,9 +57,9 @@ function bf_profile_tabs( $tabs ) {
 				$tabs[ $parent_tab_slug ]                   = array(
 					'name'   => $parent_tab_name,
 					'icon'   => $icon,
-                    'custom' => true,
-                    //'default_privacy'   => 3
-                );
+					'custom' => true,
+					//'default_privacy'   => 3
+				);
 				$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;
 				$bf_um_tabs                                 = $tabs;
 
@@ -70,14 +70,14 @@ function bf_profile_tabs( $tabs ) {
 			$tab_name = ! empty( $form['singular_name'] ) ? $form['singular_name'] : $form['name'];
 
 			// Add the Subtabs to the Ultimate Member Menue
-			$tab_view_name = __( 'View ', 'buddyforms' ) . $tab_name;
+			$tab_view_name                                               = __( 'View ', 'buddyforms' ) . $tab_name;
 			$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = apply_filters( 'bf_ultimate_member_view_tab_name', $tab_view_name, $form_slug );
 
 			// Add the Subtab for the create only if diplayd profil is from loged in user.
 			if ( um_is_user_himself() ) {
 				// Check if the user has the needed rights
 				if ( current_user_can( 'buddyforms_' . $form_slug . '_create' ) ) {
-					$tab_form_name =  __( 'Create ', 'buddyforms' ) . $tab_name;
+					$tab_form_name                                              = __( 'Create ', 'buddyforms' ) . $tab_name;
 					$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = apply_filters( 'bf_ultimate_member_form_tab_name', $tab_form_name, $form_slug );
 				}
 			}
@@ -118,6 +118,7 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 	// Check if the ultimate member view is a form view and add the coret content
 	if ( isset( $_GET['profiletab'] ) && $_GET['profiletab'] == $parent_tab ) {
 
+		$action = ( isset( $_GET['bf_um_action'] ) ) ? $_GET['bf_um_action'] : 'create';
 		if ( isset( $subnav_slug ) && $profiletab_type == 'posts' ) {
 
 			$um_user_id = um_profile_id();
@@ -130,19 +131,44 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 			$args = array(
 				'form_slug' => $form_slug
 			);
+			if ( $action !== 'create' ) {
+				// Add the post id if post edit
+				if ( isset( $_GET['bf_post_id'] ) ) {
+					$args['post_id'] = $_GET['bf_post_id'];
+				}
 
-			// Add the post id if post edit
-			if ( isset( $_GET['bf_post_id'] ) ) {
-				$args['post_id'] = $_GET['bf_post_id'];
-			}
-
-			// Add the revisionsid if needed
-			if ( isset( $_GET['bf_rev_id'] ) ) {
-				$args['revision_id'] = $_GET['bf_rev_id'];
+				// Add the revisionsid if needed
+				if ( isset( $_GET['bf_rev_id'] ) ) {
+					$args['revision_id'] = $_GET['bf_rev_id'];
+				}
 			}
 
 			buddyforms_create_edit_form( $args );
 		}
 	}
 }
+
+/**
+ * Clear the URL parameter to differentiate when the form is load to create or edit an entry
+ *
+ * @param $subnav_link
+ * @param $id_s
+ * @param $subtab
+ *
+ * @return mixed
+ * @since 1.3.4 Change the url for the subnav link to differentiate the create from edit
+ */
+function bf_um_profile_subnav_link( $subnav_link, $id_s, $subtab ) {
+	$id_array     = explode( '-', $id_s );
+	$tab_type     = $id_array[0];
+	$bf_um_action = get_query_var( 'bf_um_action', $subnav_link );
+	if ( $tab_type === 'form' && ( ! empty( $bf_um_action ) && $bf_um_action !== 'edit' ) ) {
+		$subnav_link = add_query_arg( 'bf_um_action', 'create', $subnav_link );
+		$subnav_link = remove_query_arg( 'bf_post_id', $subnav_link );
+	}
+
+	return $subnav_link;
+}
+
+add_filter( 'um_user_profile_subnav_link', 'bf_um_profile_subnav_link', 2000, 3 );
 
