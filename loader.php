@@ -48,8 +48,8 @@ function buddyforms_ultimate_members_init() {
 	require( dirname( __FILE__ ) . '/includes/functions.php' );
 	require( dirname( __FILE__ ) . '/includes/redirect.php' );
 	require( dirname( __FILE__ ) . '/includes/ultimate-member-extension.php' );
-	require( dirname( __FILE__ ) . '/includes/collaburative-posts.php' );
-	require( dirname( __FILE__ ) . '/includes/moderators.php' );
+//	require( dirname( __FILE__ ) . '/includes/collaburative-posts.php' );
+//	require( dirname( __FILE__ ) . '/includes/moderators.php' );
 
 
 }
