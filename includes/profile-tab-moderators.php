@@ -1,5 +1,29 @@
 <?php
 
+
+add_filter( 'init', 'buddyforms_moderators_ultimate_member_integration', 9999 );
+
+function buddyforms_moderators_ultimate_member_integration() {
+
+	global $buddyforms;
+
+	$integrate = false;
+
+	foreach ( $buddyforms as $form_slug => $buddyform ) {
+		if ( isset( $buddyform['ultimate_members_moderation_integration'] ) ) {
+			$integrate = true;
+		}
+	}
+
+	if ( $integrate ) {
+		add_filter( 'um_profile_tabs', 'buddyforms_moderators_um_add_tab', 9999 );
+		add_filter( 'um_user_profile_tabs', 'buddyforms_moderators_um_add_tab', 9999 );
+	}
+
+}
+
+
+
 // You could set the default privacy for custom tab and disable to change the tab privacy settings in admin menu.
 /*
 * There are values for 'default_privacy' atribute
@@ -18,8 +42,6 @@ function buddyforms_moderators_um_add_tab( $tabs ) {
 	);
 	return $tabs;
 }
-add_filter( 'um_profile_tabs', 'buddyforms_moderators_um_add_tab', 9999 );
-add_filter( 'um_user_profile_tabs', 'buddyforms_moderators_um_add_tab', 9999 );
 
 /**
  * Check an ability to view tab

@@ -93,6 +93,25 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	}
 	$form_setup[] = $element;
 
+
+
+	$ultimate_members_moderation_integration = isset( $buddyform['ultimate_members_moderation_integration'] ) ? $buddyform['ultimate_members_moderation_integration'] : '';
+	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add Moderation Tab to the Profile', 'buddyforms' ) . "</b>", "buddyforms_options[ultimate_members_moderation_integration]", array( "integrate" => "Display Moderation Tab" ), array(
+		'value'     => $ultimate_members_moderation_integration,
+		'shortDesc' => __( 'You need the Moderation Extension for ths option to take effect. You can get it from <a target="_blank" href="https://themekraft.com/products/moderation/"> here!</a>', 'buddyforms' )
+	) );
+
+
+	$ultimate_members_cpublisching_moderation_integration = isset( $buddyform['ultimate_members_cpublisching_moderation_integration'] ) ? $buddyform['ultimate_members_cpublisching_moderation_integration'] : '';
+	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add Collaborative Posts Tab to the Profile', 'buddyforms' ) . "</b>", "buddyforms_options[ultimate_members_cpublisching_moderation_integration]", array( "integrate" => "Display Collaborative Publishing Tab" ), array(
+		'value'     => $ultimate_members_cpublisching_moderation_integration,
+		'shortDesc' => __( 'You need the Collaborative Publishing Extension for ths option to take effect. You can get it from <a target="_blank" href="https://themekraft.com/products/collaburative-publishing/"> here!</a>', 'buddyforms' )
+	) );
+
+
+
+
+
 	buddyforms_display_field_group_table( $form_setup );
 
 }
