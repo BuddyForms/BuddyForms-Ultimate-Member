@@ -90,11 +90,13 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
-= 1.3.4 - 24 Sep 2019 =
+= 1.3.4 - 30 Sep 2019 =
 * Fixed the list of entries to only show the entries belong to the current form.
 * Start add collaborative publishing support.
 * Added a Moderation support.
 * Fixed the redirection to create a new entry after edit one entry.
+* Added a new options to allow frontend moderation in Ultimate Member.
+* Added a new options to allow frontend collaborative publishing in Ultimate Member.
 
 = 1.3.3 - 19 Aug 2019 =
 * Added a filter to change the name of the sub-tabs to view the list of entries and the form.
