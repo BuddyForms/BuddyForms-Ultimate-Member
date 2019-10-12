@@ -143,6 +143,8 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 				}
 			}
 
+			wp_enqueue_style( 'buddyforms-ultimate-member-css', BUDDYFORMS_ULTIMATE_MEMBER_ASSETS . 'css/buddyforms-ultimate-member.css' );
+
 			buddyforms_create_edit_form( $args );
 		}
 	}

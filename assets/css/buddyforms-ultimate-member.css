@@ -1,0 +1,10 @@
+.um .the_buddyforms_form *, .um .the_buddyforms_form *:before, .um .the_buddyforms_form *:after {
+    box-sizing: inherit;
+}
+
+.um .the_buddyforms_form .bf_field_group input.error,
+.um .the_buddyforms_form .bf_field_group select.error,
+.um .the_buddyforms_form .bf_field_group button.error,
+.um .the_buddyforms_form .bf_field_group textarea.error {
+    border: 1px solid red !important;
+}

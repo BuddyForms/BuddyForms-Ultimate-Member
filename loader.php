@@ -43,6 +43,8 @@ function buddyforms_ultimate_members_init() {
 		return;
 	}
 
+	define('BUDDYFORMS_ULTIMATE_MEMBER_ASSETS', plugins_url( 'assets/', __FILE__ ));
+
 	// Require all needed files
 	require( dirname( __FILE__ ) . '/includes/form-builder.php' );
 	require( dirname( __FILE__ ) . '/includes/functions.php' );
