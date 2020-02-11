@@ -4,7 +4,7 @@ Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form 
 Requires at least: 3.9
 Tested up to: 5.3
 License: GPLv2 or later
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -90,6 +90,12 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+= 1.3.5 - 11 Feb 2020 =
+* Fixed the style issue faced for some of the form component getting more width than the parent.
+* Improved compatibility with WP 5.3
+* Fixed the permission to check if the user have create permission to show the create button in the UM profile tab.
+* Fixed the hook priority for the post list actions.
+
 = 1.3.4 - 30 Sep 2019 =
 * Fixed the list of entries to only show the entries belong to the current form.
 * Start add collaborative publishing support.
