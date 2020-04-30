@@ -61,6 +61,13 @@ function buddyforms_um_add_new_submissions_to_the_um_activity_component( $args )
 		return;
 	}
 
+	$post_status = get_post_status( $post_id );
+
+
+	if ( $post_status != 'publish' ) {
+		return;
+	}
+
 	$post = get_post( $post_id );
 
 	$buddyforms_um_activity = get_post_meta( $post_id, 'buddyforms_um_activity', true );
