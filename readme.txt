@@ -2,7 +2,7 @@
 Contributors: svenl77, konradS, buddyforms, themekraft, gfirem
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 5.3
+Tested up to: 5.4
 License: GPLv2 or later
 Stable tag: 1.3.5
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
