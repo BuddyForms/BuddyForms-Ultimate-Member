@@ -43,7 +43,9 @@ function buddyforms_ultimate_members_init() {
 		return;
 	}
 
-	define('BUDDYFORMS_ULTIMATE_MEMBER_ASSETS', plugins_url( 'assets/', __FILE__ ));
+	add_action( 'init', 'buddyforms_ultimate_load_plugin_textdomain' );
+
+	define( 'BUDDYFORMS_ULTIMATE_MEMBER_ASSETS', plugins_url( 'assets/', __FILE__ ) );
 
 	// Require all needed files
 	require( dirname( __FILE__ ) . '/includes/form-builder.php' );
@@ -52,8 +54,48 @@ function buddyforms_ultimate_members_init() {
 	require( dirname( __FILE__ ) . '/includes/ultimate-member-extension.php' );
 	require( dirname( __FILE__ ) . '/includes/profile-tab-cpublishing.php' );
 	require( dirname( __FILE__ ) . '/includes/profile-tab-moderators.php' );
+	require( dirname( __FILE__ ) . '/includes/ultimate-member-settings.php' );
 
+	buddyforms_ultimate_update_new_version_136();
+}
 
+/**
+ * Update for new version 1.3.6 delete it in the feature
+ */
+function buddyforms_ultimate_update_new_version_136(){
+	$updated_136 = get_option( 'buddyforms_ultimate_member_update_136', false );
+	if ( empty( $updated_136 ) ) {
+		global $buddyforms;
+		$integrate_moderation   = false;
+		$integrate_cpublisching = false;
+		foreach ( $buddyforms as $form_slug => $buddyform ) {
+			if ( isset( $buddyform['ultimate_members_moderation_integration'] ) ) {
+				$integrate_moderation = true;
+				break;
+			}
+		}
+		foreach ( $buddyforms as $form_slug => $buddyform ) {
+			if ( isset( $buddyform['ultimate_members_cpublisching_moderation_integration'] ) ) {
+				$integrate_cpublisching = true;
+				break;
+			}
+		}
+		$new_option = array();
+		if ( $integrate_moderation ) {
+			$new_option['moderation_tab'] = 'activate';
+		}
+		if ( $integrate_cpublisching ) {
+			$new_option['collaborative_post_tab'] = 'activate';
+		}
+
+		update_option( 'buddyforms_ultimate_settings', $new_option );
+		update_option( 'buddyforms_ultimate_member_update_136', true );
+	}
+
+}
+
+function buddyforms_ultimate_load_plugin_textdomain() {
+	load_plugin_textdomain( 'buddyforms-ultimate-member', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 //

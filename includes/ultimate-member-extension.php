@@ -71,7 +71,7 @@ function bf_profile_tabs( $tabs ) {
 				$tab_name = ! empty( $form['singular_name'] ) ? $form['singular_name'] : $form['name'];
 
 				// Add the Subtabs to the Ultimate Member Menue
-				$tab_view_name                                               = __( 'View ', 'buddyforms' ) . $tab_name;
+				$tab_view_name                                               = __( 'View ', 'buddyforms-ultimate-member' ) . $tab_name;
 				$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = apply_filters( 'bf_ultimate_member_view_tab_name', $tab_view_name, $form_slug );
 
 				// Add the Subtab for the create only if diplayd profil is from loged in user.
@@ -80,7 +80,7 @@ function bf_profile_tabs( $tabs ) {
 					$current_user_id         = um_user( 'ID' );
 					$current_user_can_create = bf_user_can( $current_user_id, 'buddyforms_' . $form_slug . '_create', array(), $form_slug );
 					if ( $current_user_can_create ) {
-						$tab_form_name                                              = __( 'Create ', 'buddyforms' ) . $tab_name;
+						$tab_form_name                                              = __( 'Create ', 'buddyforms-ultimate-member' ) . $tab_name;
 						$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = apply_filters( 'bf_ultimate_member_form_tab_name', $tab_form_name, $form_slug );
 					}
 				}

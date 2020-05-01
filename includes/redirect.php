@@ -151,7 +151,7 @@ function bf_ultimate_member_page_link_router_edit( $link, $id ) {
 
 	$link_href = get_the_permalink( $um_options['core_user'] ) . $userdata->user_nicename . '?profiletab=' . $parent_tab . '&bf_um_action=edit&subnav=form-' . $form_slug . '&bf_post_id=' . $id;
 
-	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . $link_href . '">' . __( 'Edit', 'buddyforms' ) . '</a>';
+	return '<a title="Edit" id="' . $id . '" class="bf_edit_post" href="' . $link_href . '">' . __( 'Edit', 'buddyforms-ultimate-member' ) . '</a>';
 }
 
 add_filter( 'buddyforms_loop_edit_post_link', 'bf_ultimate_member_page_link_router_edit', 20, 2 );

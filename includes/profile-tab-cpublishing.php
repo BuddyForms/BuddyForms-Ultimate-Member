@@ -4,40 +4,46 @@ add_filter( 'init', 'buddyforms_cpublishing_ultimate_member_integration', 9999 )
 
 function buddyforms_cpublishing_ultimate_member_integration() {
 
-	global $buddyforms;
+	$ultimate_members_settings = get_option( 'buddyforms_ultimate_settings' );
 
-	$integrate = false;
-
-	foreach ( $buddyforms as $form_slug => $buddyform ) {
-		if ( isset( $buddyform['ultimate_members_cpublisching_moderation_integration'] ) ) {
-			$integrate = true;
-		}
-	}
+	$integrate = ( ! empty( $ultimate_members_settings ) && ! empty( $ultimate_members_settings['collaborative_post_tab'] ) && $ultimate_members_settings['collaborative_post_tab'] === 'activate' );
 
 	if ( $integrate ) {
 		add_filter( 'um_profile_tabs', 'buddyforms_cpublishing_um_add_tab', 9999 );
-		add_filter( 'um_user_profile_tabs', 'buddyforms_cpublishing_um_add_tab', 9999 );
 	}
 
 }
 
 
 // You could set the default privacy for custom tab and disable to change the tab privacy settings in admin menu.
-/*
-* There are values for 'default_privacy' atribute
-* 0 - Anyone,
-* 1 - Guests only,
-* 2 - Members only,
-* 3 - Onlownery the
-*/
-// Filter
 function buddyforms_cpublishing_um_add_tab( $tabs ) {
-	$tabs['buddyforms_cpublishing'] = array(
-		'name'            => 'Collaborative Posts',
-		'icon'            => 'um-faicon-pencil',
-//		'custom' => true,
-		'default_privacy' => 3,
+	$ultimate_members_settings = get_option( 'buddyforms_ultimate_settings' );
+
+	$integrate = ( ! empty( $ultimate_members_settings ) && ! empty( $ultimate_members_settings['collaborative_post_tab'] ) && $ultimate_members_settings['collaborative_post_tab'] === 'activate' );
+
+	UM()->options()->options['profile_tab_buddyforms_cpublishing'] = $integrate;
+
+	if ( ! $integrate ) {
+		return $tabs;
+	}
+
+	$privacy = ( ! empty( $ultimate_members_settings ) && ! empty( $ultimate_members_settings['collaborative_post_tab_privacy'] ) ) ? intval( $ultimate_members_settings['collaborative_post_tab_privacy'] ) : 3;
+
+	$tab_name = apply_filters( 'buddyforms_ultimate_member_collaborative_tab_title', __( 'Collaborative Posts', 'buddyforms-ultimate-member' ) );
+	if ( ! empty( $ultimate_members_settings['collaborative_post_tab_name'] ) ) {
+		$tab_name = $ultimate_members_settings['collaborative_post_tab_name'];
+	}
+
+	$args = array(
+		'name' => $tab_name,
+		'icon' => 'um-faicon-gift',
 	);
+
+	if ( $privacy !== 5 ) {
+		$args['default_privacy'] = $privacy;
+	}
+
+	$tabs['buddyforms_cpublishing'] = $args;
 
 	return $tabs;
 }
@@ -63,11 +69,13 @@ function buddyforms_cpublishing_um_add_tab_visibility( $tabs ) {
 	return $tabs;
 }
 
-add_filter( 'um_user_profile_tabs', 'buddyforms_cpublishing_um_add_tab_visibility', 2000, 1 );
+//add_filter( 'um_user_profile_tabs', 'buddyforms_cpublishing_um_add_tab_visibility', 2000, 1 );
 
 // Action
 function um_profile_content_buddyforms_cpublishing_default( $args ) {
-	echo do_shortcode( '[buddyforms_list_editor_posts]' );
+	if(!empty($GLOBALS['BuddyFormsCPublishing'])) {
+		echo do_shortcode( '[buddyforms_list_editor_posts]' );
+	}
 }
 
 add_action( 'um_profile_content_buddyforms_cpublishing_default', 'um_profile_content_buddyforms_cpublishing_default' );
