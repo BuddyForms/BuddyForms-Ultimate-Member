@@ -32,7 +32,7 @@ function bf_ultimate_member_parent_tab( $member_form ) {
 		$parent_tab_name = $parent_tab_page->post_name;
 	}
 
-    return str_replace('-', '', $parent_tab_name);
+	return str_replace( '-', '', $parent_tab_name );
 }
 
 //
@@ -115,7 +115,32 @@ function buddyforms_um_add_new_submissions_to_the_um_activity_component( $args )
 
 add_filter( 'buddyforms_ask_to_become_an_author_url', 'buddyforms_cpublishing_ask_to_become_an_author_url' );
 
-function buddyforms_cpublishing_ask_to_become_an_author_url($url, $user_id){
+function buddyforms_cpublishing_ask_to_become_an_author_url( $url, $user_id ) {
 	um_fetch_user( $user_id );
+
 	return um_user_profile_url();
 }
+
+function buddyforms_moderation_create_submission_link( $default_link, $form_slug, $args ) {
+	if ( empty( $form_slug ) ) {
+		return $default_link;
+	}
+	$is_ultimate_members_profiles_integration = buddyforms_get_form_option( $form_slug, 'ultimate_members_profiles_integration' );
+	if ( empty( $is_ultimate_members_profiles_integration ) ) {
+		return $default_link;
+	}
+	$user_id = get_current_user_id();
+	if ( empty( $user_id ) ) {
+		return $default_link;
+	}
+
+	$attached_page     = buddyforms_get_form_option( $form_slug, 'attached_page' );
+	$attached_page_url = get_permalink( $attached_page );
+
+	$attached_page_url = add_query_arg( 'subnav', 'form-' . $form_slug, $attached_page_url );
+	$attached_page_url = add_query_arg( 'bf_um_action', 'create', $attached_page_url );
+
+	return $attached_page_url;
+}
+
+add_filter( 'buddyforms_create_submission_link', 'buddyforms_moderation_create_submission_link', 10, 3 );

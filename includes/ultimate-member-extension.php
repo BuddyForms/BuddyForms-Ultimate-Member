@@ -12,7 +12,6 @@ function bf_profile_tabs( $tabs ) {
 		foreach ( $buddyforms as $form_slug => $form ) {
 			if ( isset( $form['ultimate_members_profiles_integration'] ) ) {
 
-
 				$show = false;
 				if ( $form['um_profile_visibility'] == 'logged_in_user' && is_user_logged_in() ) {
 					$show = true;
@@ -30,10 +29,8 @@ function bf_profile_tabs( $tabs ) {
 					continue;
 				}
 
-
 				// Set the Tap slug
 				$parent_tab_slug = bf_ultimate_member_parent_tab( $form );
-
 
 				// Set the Tab name
 				$parent_tab_name = $form['name'];
