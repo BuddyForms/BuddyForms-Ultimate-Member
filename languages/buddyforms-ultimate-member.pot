@@ -1,0 +1,222 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyForms Ultimate Member\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-18 19:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.4; wp-5.5.3"
+
+#: includes/form-builder.php:36
+msgid ""
+"<font color=\"#b22222\">This Form is Broken!</font> This form slug is "
+"\"posts\". This slug is reserved for the Ultimate Member Posts Tab. You can "
+"only Use Attached Page as Parent Tab and make this form a sub tab of the "
+"parent. Please check both options"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:28
+msgid "Activate"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:116
+msgid "Add Collaborative Posts Tab"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:74
+msgid "Add Moderation Tab"
+msgstr ""
+
+#: includes/form-builder.php:97
+msgid "Add Moderation Tab to the Profile"
+msgstr ""
+
+#: includes/form-builder.php:42
+msgid "Add this form as Profile Tab"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:109
+msgid "BuddyForms Collaborative"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:67
+msgid "BuddyForms Moderation"
+msgstr ""
+
+#. Name of the plugin
+msgid "BuddyForms Ultimate Member"
+msgstr ""
+
+#: includes/profile-tab-cpublishing.php:32
+#: includes/ultimate-member-settings.php:47
+msgid "Collaborative Posts"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:136
+msgid "Collaborative Tab Privacy"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:128
+msgid "Collaborative Tab Title"
+msgstr ""
+
+#: includes/ultimate-member-extension.php:80
+msgid "Create "
+msgstr ""
+
+#: includes/ultimate-member-settings.php:27
+msgid "Deactivate"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:32
+msgid "Define in Moderation"
+msgstr ""
+
+#: includes/redirect.php:154
+msgid "Edit"
+msgstr ""
+
+#. Description of the plugin
+msgid "Extend Ultimate Member Profiles with BuddyForms"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:103
+#: includes/ultimate-member-settings.php:145
+#, php-format
+msgid ""
+"For more privacy option check inside the UM Profile Member <a "
+"target=\"_blank\" href=\"%s\">here!</a>"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:31
+msgid "Force to `Only the owner`"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:62
+msgid "Global options related to BuddyForms Ultimate Member"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://themekraft.com/buddyforms/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://themekraft.com/products/ultimate-member/"
+msgstr ""
+
+#: includes/form-builder.php:42
+msgid "Integrate this Form"
+msgstr ""
+
+#: includes/form-builder.php:79
+msgid "Label"
+msgstr ""
+
+#: includes/form-builder.php:55
+msgid "List submissions in the social activity wall"
+msgstr ""
+
+#: includes/form-builder.php:48
+msgid ""
+"Many Forms can have the same attached Page. All Forms with the same page "
+"with page as parent enabled will be listed as sub forms. This why you can "
+"group forms."
+msgstr ""
+
+#: includes/form-builder.php:44
+msgid ""
+"Many forms can share the same attached page. All Forms with the same "
+"attached page can be grouped together with this option. All Forms will be "
+"listed as sub nav tabs of the page main nav"
+msgstr ""
+
+#: includes/form-builder.php:88
+msgid "Menu Icon"
+msgstr ""
+
+#: includes/profile-tab-moderators.php:31
+#: includes/ultimate-member-settings.php:44
+msgid "Moderate Posts"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:94
+msgid "Moderation Tab Privacy"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:86
+msgid "Moderation Tab Title"
+msgstr ""
+
+#: includes/form-builder.php:80
+msgid "Profile Tab Label"
+msgstr ""
+
+#: includes/form-builder.php:53
+msgid "Social Activity Integration"
+msgstr ""
+
+#: includes/form-builder.php:97
+#, php-format
+msgid ""
+"The options to add <b>Moderation</b> and <b>Collaborative Posts</b> Tabs to "
+"the Profile is now inside the settings <a target=\"_blank\" href=\"%s\"> "
+"here!</a>"
+msgstr ""
+
+#. Author of the plugin
+msgid "ThemeKraft"
+msgstr ""
+
+#: includes/form-builder.php:89
+msgid ""
+"Ultimate Member profile menu item. List off all <a href=\"https://gist."
+"github.com/plusplugins/b504b6851cb3a8a6166585073f3110dd\" target=\"_blank\">"
+"UM Favicon Icons</a>"
+msgstr ""
+
+#: includes/form-builder.php:46
+msgid ""
+"Use Attached Page as Parent Tab and make this form a sub tab of the parent"
+msgstr ""
+
+#: includes/ultimate-member-extension.php:71
+msgid "View "
+msgstr ""
+
+#: includes/form-builder.php:66
+msgid "Visibility"
+msgstr ""
+
+#: includes/form-builder.php:70
+msgid "Who can see submissions in Profiles?"
+msgstr ""
+
+#: includes/ultimate-member-settings.php:111
+msgid ""
+"You need the Collaborative Publishing Extension for ths option to take "
+"effect."
+msgstr ""
+
+#: includes/ultimate-member-settings.php:69
+msgid ""
+"You need the Moderation Extension for ths option to take effect. You can get "
+"it from <a target=\"_blank\" href=\"https://themekraft."
+"com/products/moderation/\"> here!</a>"
+msgstr ""
+
+msgid "Private - Only the logged in member in his profile."
+msgstr ""
+
+msgid "Community - Logged in user can see other users profile posts"
+msgstr ""
+
+msgid "Public Visible - Unregistered users can see user profile posts"
+msgstr ""

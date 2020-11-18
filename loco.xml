@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle name="BuddyForms Ultimate Member">
+  <domain name="buddyforms-ultimate-member">
+    <project name="BuddyForms Ultimate Member" slug="buddyforms-ultimate-member">
+      <source>
+        <directory>includes</directory>
+      </source>
+      <target>
+        <directory>languages</directory>
+      </target>
+      <template>
+        <file>languages/buddyforms-ultimate-member.pot</file>
+      </template>
+    </project>
+  </domain>
+  <exclude>
+    <directory>includes/resources/freemius</directory>
+  </exclude>
+</bundle>

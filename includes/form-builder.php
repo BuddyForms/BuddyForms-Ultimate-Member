@@ -39,7 +39,7 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 	}
 
 	// Add the form elements
-	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add this form as Profile Tab', 'buddyforms-ultimate-member' ) . "</b>", "buddyforms_options[ultimate_members_profiles_integration]", array( "integrate" => "Integrate this Form" ), array(
+	$form_setup[] = new Element_Checkbox( "<b>" . __( 'Add this form as Profile Tab', 'buddyforms-ultimate-member' ) . "</b>", "buddyforms_options[ultimate_members_profiles_integration]", array( "integrate" => __('Integrate this Form', 'buddyforms-ultimate-member') ), array(
 		'value'     => $ultimate_members_profiles_integration,
 		'shortDesc' => __( 'Many forms can share the same attached page. All Forms with the same attached page can be grouped together with this option. All Forms will be listed as sub nav tabs of the page main nav', 'buddyforms-ultimate-member' )
 	) );
@@ -63,9 +63,10 @@ function buddyforms_ultimate_members_admin_settings_sidebar_metabox_html() {
 
 
 	$um_profile_visibility = isset( $buddyform['um_profile_visibility'] ) ? $buddyform['um_profile_visibility'] : 'private';
-	$element = new Element_Select( "<br><b>" . __( 'Visibility', 'buddyforms-ultimate-member' ) . "</b>", "buddyforms_options[um_profile_visibility]", array( "private"        => "Private - Only the logged in member in his profile.",
-	                                                                                                                                            "logged_in_user" => "Community - Logged in user can see other users profile posts",
-	                                                                                                                                            "any"            => "Public Visible - Unregistered users can see user profile posts"
+	$element = new Element_Select( "<br><b>" . __( 'Visibility', 'buddyforms-ultimate-member' ) . "</b>", "buddyforms_options[um_profile_visibility]", array( 
+		"private"        => __('Private - Only the logged in member in his profile.', 'buddyforms-ultimate-member' ),
+		"logged_in_user" => __('Community - Logged in user can see other users profile posts', 'buddyforms-ultimate-member' ),
+		"any"            => __('Public Visible - Unregistered users can see user profile posts', 'buddyforms-ultimate-member' ),
 	), array( 'value'     => $um_profile_visibility,
 	          'shortDesc' => __( 'Who can see submissions in Profiles?', 'buddyforms-ultimate-member' )
 	) );
