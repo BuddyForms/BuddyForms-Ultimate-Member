@@ -8,7 +8,8 @@
  * Author URI: https://themekraft.com/buddyforms/
  * License: GPLv2 or later
  * Network: false
- * Text Domain: buddyforms
+ * Text Domain: buddyforms-ultimate-member
+ * Domain Path: /languages
  * Svn: buddyforms-ultimate-member
  *****************************************************************************
  *
@@ -43,7 +44,7 @@ function buddyforms_ultimate_members_init() {
 		return;
 	}
 
-	add_action( 'init', 'buddyforms_ultimate_load_plugin_textdomain' );
+	load_plugin_textdomain( 'buddyforms-ultimate-member', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 	define( 'BUDDYFORMS_ULTIMATE_MEMBER_ASSETS', plugins_url( 'assets/', __FILE__ ) );
 
@@ -92,10 +93,6 @@ function buddyforms_ultimate_update_new_version_136(){
 		update_option( 'buddyforms_ultimate_member_update_136', true );
 	}
 
-}
-
-function buddyforms_ultimate_load_plugin_textdomain() {
-	load_plugin_textdomain( 'buddyforms-ultimate-member', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 //
