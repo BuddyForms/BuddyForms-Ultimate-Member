@@ -89,19 +89,11 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[moderation_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['moderation_tab_name'] ) ?>">
 								</td>
 							</tr>
-							<tr valign="top">
-								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_moderation_tab_privacy"><?php _e( 'Moderation Tab Privacy', 'buddyforms-ultimate-member' ); ?></label>
+
+							<tr>
+								<th colspan="2">
+									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
 								</th>
-								<td class="forminp forminp-select">
-									<select name="buddyforms_ultimate_settings[moderation_tab_privacy]" id="buddyforms_ultimate_settings_moderation_tab_privacy">
-										<?php foreach ( $privacy as $privacy_key => $privacy_name ) : ?>
-											<option value="<?php echo $privacy_key ?>" <?php selected( $privacy_key, $ultimate_members_settings['moderation_tab_privacy'] ); ?> ><?php echo $privacy_name ?></option>
-										<?php endforeach; ?>
-									</select>
-									<br/>
-									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?></small>
-								</td>
 							</tr>
 
 							<tr>
@@ -131,19 +123,11 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[collaborative_post_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['collaborative_post_tab_name'] ) ?>">
 								</td>
 							</tr>
-							<tr valign="top">
-								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_moderation_tab_privacy"><?php _e( 'Collaborative Tab Privacy', 'buddyforms-ultimate-member' ); ?></label>
+
+							<tr>
+								<th colspan="2">
+									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
 								</th>
-								<td class="forminp forminp-select">
-									<select name="buddyforms_ultimate_settings[collaborative_post_tab_privacy]" id="buddyforms_ultimate_settings_moderation_tab_privacy">
-										<?php foreach ( $privacy as $privacy_key => $privacy_name ) : ?>
-											<option value="<?php echo $privacy_key ?>" <?php selected( $privacy_key, $ultimate_members_settings['collaborative_post_tab_privacy'] ); ?> ><?php echo $privacy_name ?></option>
-										<?php endforeach; ?>
-									</select>
-									<br/>
-									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?></small>
-								</td>
 							</tr>
 
 							</tbody>

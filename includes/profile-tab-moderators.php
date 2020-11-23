@@ -26,8 +26,6 @@ function buddyforms_moderators_um_add_tab( $tabs ) {
 		return $tabs;
 	}
 
-	$privacy = ( ! empty( $ultimate_members_settings ) && ! empty( $ultimate_members_settings['moderation_tab_privacy'] ) ) ? intval( $ultimate_members_settings['moderation_tab_privacy'] ) : 3;
-
 	$tab_name = apply_filters( 'buddyforms_ultimate_member_moderation_tab_title', __( 'Moderate Posts', 'buddyforms-ultimate-member' ) );
 	if ( ! empty( $ultimate_members_settings['moderation_tab_name'] ) ) {
 		$tab_name = $ultimate_members_settings['moderation_tab_name'];
@@ -39,12 +37,7 @@ function buddyforms_moderators_um_add_tab( $tabs ) {
 		'custom' => true,
 	);
 
-	if ( $privacy !== 5 ) {
-		$args['default_privacy'] = $privacy;
-	}
-
 	$tabs['buddyforms_moderation'] = $args;
-
 
 	return $tabs;
 }

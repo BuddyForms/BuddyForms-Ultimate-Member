@@ -27,8 +27,6 @@ function buddyforms_cpublishing_um_add_tab( $tabs ) {
 		return $tabs;
 	}
 
-	$privacy = ( ! empty( $ultimate_members_settings ) && ! empty( $ultimate_members_settings['collaborative_post_tab_privacy'] ) ) ? intval( $ultimate_members_settings['collaborative_post_tab_privacy'] ) : 3;
-
 	$tab_name = apply_filters( 'buddyforms_ultimate_member_collaborative_tab_title', __( 'Collaborative Posts', 'buddyforms-ultimate-member' ) );
 	if ( ! empty( $ultimate_members_settings['collaborative_post_tab_name'] ) ) {
 		$tab_name = $ultimate_members_settings['collaborative_post_tab_name'];
@@ -38,10 +36,6 @@ function buddyforms_cpublishing_um_add_tab( $tabs ) {
 		'name' => $tab_name,
 		'icon' => 'um-faicon-gift',
 	);
-
-	if ( $privacy !== 5 ) {
-		$args['default_privacy'] = $privacy;
-	}
 
 	$tabs['buddyforms_cpublishing'] = $args;
 
