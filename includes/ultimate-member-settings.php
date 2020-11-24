@@ -92,7 +92,7 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 
 							<tr>
 								<th colspan="2">
-									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
+									<small><?php echo sprintf( __( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
 								</th>
 							</tr>
 
@@ -126,7 +126,7 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 
 							<tr>
 								<th colspan="2">
-									<small><?php echo sprintf( __( 'For more privacy option check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
+									<small><?php echo sprintf( __( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
 								</th>
 							</tr>
 
