@@ -3,7 +3,7 @@
  * Plugin Name: BuddyForms Ultimate Member
  * Plugin URI: https://themekraft.com/products/ultimate-member/
  * Description: Extend Ultimate Member Profiles with BuddyForms
- * Version: 1.3.8
+ * Version: 1.3.9
  * Author: ThemeKraft
  * Author URI: https://themekraft.com/buddyforms/
  * License: GPLv2 or later
