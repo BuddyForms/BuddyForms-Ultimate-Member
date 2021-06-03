@@ -122,9 +122,15 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 		$action = ( isset( $_GET['bf_um_action'] ) ) ? $_GET['bf_um_action'] : 'create';
 		if ( isset( $subnav_slug ) && $profiletab_type == 'posts' ) {
 
+			$paged = 1;
+			if ( isset( $_GET['bf_um_page'] ) && ! empty( $_GET['bf_um_page'] ) ) {
+				$paged = (int) $_GET['bf_um_page'];
+			}
+
 			$um_user_id = um_profile_id();
+
 			// Display the posts
-			echo do_shortcode( '[buddyforms_the_loop user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . $um_user_id . '"]' );
+			echo do_shortcode( '[buddyforms_the_loop paged=' . $paged  . ' user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . $um_user_id . '"]' );
 
 		} elseif ( isset( $_GET['subnav'] ) && $profiletab_type == 'form' ) {
 

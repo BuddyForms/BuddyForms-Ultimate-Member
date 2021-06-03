@@ -144,3 +144,45 @@ function buddyforms_moderation_create_submission_link( $default_link, $form_slug
 }
 
 add_filter( 'buddyforms_create_submission_link', 'buddyforms_moderation_create_submission_link', 10, 3 );
+
+
+add_filter( 'buddyforms_next_posts_link', 'buddyforms_um_next_posts_link', 10, 2 );
+function buddyforms_um_next_posts_link( $link, $form_slug ) {
+	global $buddyforms;
+
+	$parent_tab = bf_ultimate_member_parent_tab( $buddyforms[ $form_slug ] );
+
+	if ( ! isset( $_GET['profiletab'] ) ) {
+		return $link;
+	}
+
+	if ( $_GET['profiletab'] !== $parent_tab || empty( $link ) ) {
+		return $link;
+	}
+
+	$page = ! empty( $_GET['bf_um_page'] ) ? ( (int) $_GET['bf_um_page'] + 1 ) : 2;
+	$link = '<a href="' . add_query_arg( 'bf_um_page', $page ) . '">&larr;' . __( 'Previos Entries ', 'buddyforms' ) . '</a>';
+
+
+	return $link;
+}
+
+add_filter( 'buddyforms_previos_posts_link', 'buddyforms_um_previos_posts_link', 10, 2 );
+function buddyforms_um_previos_posts_link( $link, $form_slug ) {
+	global $buddyforms;
+
+	$parent_tab = bf_ultimate_member_parent_tab( $buddyforms[ $form_slug ] );
+
+	if ( ! isset( $_GET['profiletab'] ) ) {
+		return $link;
+	}
+
+	if ( $_GET['profiletab'] !== $parent_tab || empty( $link ) ) {
+		return $link;
+	}
+
+	$page = (int) $_GET['bf_um_page'] - 1;
+	$link = '<a href="' . add_query_arg( 'bf_um_page', $page ) . '">' . __( 'Next Entries', 'buddyforms' ) . '&rarr;</a>';
+	
+	return $link;	
+}
