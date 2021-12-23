@@ -30,14 +30,20 @@
  *****************************************************************************
  */
 
+add_action( 'activate_plugin', 'buddyforms_um_parent_validation' , 10, 2);
+
+function buddyforms_um_parent_validation( $plugin, $network_wide ){
+
+	// Check if BuddyForms is activated
+	if ( ! buddyforms_um_fs_is_parent_active() ) {
+		wp_die('<p>To activate <strong>BuddyForms Ultimate Member</strong> addon first you <strong>need</strong> to activate <strong>BuddyForms</strong>.</p>');
+	}
+	
+}
+
 add_action( 'init', 'buddyforms_ultimate_members_init' );
 
 function buddyforms_ultimate_members_init() {
-
-	// Check if BuddyForms is activated
-	if ( ! defined( 'BUDDYFORMS_VERSION' ) ) {
-		return;
-	}
 
 	// Check if Ultimate Member is activated
 	if ( ! class_exists( 'UM' ) ) {
@@ -207,8 +213,8 @@ function buddyforms_um_fs_is_parent_active() {
 	}
 
 	foreach ( $active_plugins as $basename ) {
-		if ( 0 === strpos( $basename, 'buddyforms/' ) ||
-		     0 === strpos( $basename, 'buddyforms-premium/' )
+		if ( 0 === strpos( strtolower( $basename ), 'buddyforms/' ) ||
+		     0 === strpos( strtolower( $basename ), 'buddyforms-premium/' )
 		) {
 			return true;
 		}
