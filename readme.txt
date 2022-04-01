@@ -2,9 +2,9 @@
 Contributors: svenl77, konradS, buddyforms, themekraft, gfirem
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 5.8
+Tested up to: 5.9
 License: GPLv2 or later
-Stable tag: 1.3.11
+Stable tag: 1.3.12
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -90,6 +90,9 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+= 1.3.12 - 31 Mar 2022 =
+* Tested up to WordPress 5.9
+
 = 1.3.11 - 23 Dec 2021 =
 * Fixed validation issue during plugin activation.
 
