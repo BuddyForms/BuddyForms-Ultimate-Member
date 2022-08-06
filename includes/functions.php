@@ -63,7 +63,6 @@ function buddyforms_um_add_new_submissions_to_the_um_activity_component( $args )
 
 	$post_status = get_post_status( $post_id );
 
-
 	if ( $post_status != 'publish' ) {
 		return;
 	}
@@ -163,7 +162,6 @@ function buddyforms_um_next_posts_link( $link, $form_slug ) {
 	$page = ! empty( $_GET['bf_um_page'] ) ? ( (int) $_GET['bf_um_page'] + 1 ) : 2;
 	$link = '<a href="' . add_query_arg( 'bf_um_page', $page ) . '">&larr;' . __( 'Previos Entries ', 'buddyforms' ) . '</a>';
 
-
 	return $link;
 }
 
@@ -183,6 +181,6 @@ function buddyforms_um_previos_posts_link( $link, $form_slug ) {
 
 	$page = (int) $_GET['bf_um_page'] - 1;
 	$link = '<a href="' . add_query_arg( 'bf_um_page', $page ) . '">' . __( 'Next Entries', 'buddyforms' ) . '&rarr;</a>';
-	
-	return $link;	
+
+	return $link;
 }

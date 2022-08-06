@@ -25,7 +25,7 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 
 	$options = array(
 		'deactivate' => __( 'Deactivate', 'buddyforms-ultimate-member' ),
-		'activate'   => __( 'Activate', 'buddyforms-ultimate-member' )
+		'activate'   => __( 'Activate', 'buddyforms-ultimate-member' ),
 	);
 	$privacy = array(
 		3 => __( 'Force to `Only the owner`', 'buddyforms-ultimate-member' ),
@@ -59,74 +59,74 @@ function buddyforms_ultimate_members_admin_tab_page( $tab ) {
 							<tbody>
 							<tr>
 								<th colspan="2">
-									<h1><span><?php _e( 'Global options related to BuddyForms Ultimate Member', 'buddyforms-ultimate-member' ); ?></span></h1>
+									<h1><span><?php esc_html_e( 'Global options related to BuddyForms Ultimate Member', 'buddyforms-ultimate-member' ); ?></span></h1>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="2">
-									<h3><span><?php _e( 'BuddyForms Moderation', 'buddyforms-ultimate-member' ); ?></span></h3>
+									<h3><span><?php esc_html_e( 'BuddyForms Moderation', 'buddyforms-ultimate-member' ); ?></span></h3>
 									<hr/>
-									<small><?php _e( 'You need the Moderation Extension for ths option to take effect. You can get it from <a target="_blank" href="https://themekraft.com/products/moderation/"> here!</a>', 'buddyforms-ultimate-member' ) ?></small>
+									<small><?php esc_html_e( 'You need the Moderation Extension for ths option to take effect. You can get it from <a target="_blank" href="https://themekraft.com/products/moderation/"> here!</a>', 'buddyforms-ultimate-member' ); ?></small>
 								</th>
 							</tr>
 							<tr valign="top">
 								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_moderation_tab"><?php _e( 'Add Moderation Tab', 'buddyforms-ultimate-member' ); ?></label>
+									<label for="buddyforms_ultimate_settings_moderation_tab"><?php esc_html_e( 'Add Moderation Tab', 'buddyforms-ultimate-member' ); ?></label>
 								</th>
 								<td class="forminp forminp-select">
 									<select name="buddyforms_ultimate_settings[moderation_tab]" id="buddyforms_ultimate_settings_moderation_tab">
 										<?php foreach ( $options as $item_key => $item_name ) : ?>
-											<option value="<?php echo $item_key ?>" <?php selected( $item_key, $ultimate_members_settings['moderation_tab'] ); ?> ><?php echo $item_name ?></option>
+											<option value="<?php echo esc_attr( $item_key ); ?>" <?php selected( $item_key, $ultimate_members_settings['moderation_tab'] ); ?> ><?php echo esc_html( $item_name ); ?></option>
 										<?php endforeach; ?>
 									</select>
 								</td>
 							</tr>
 							<tr valign="top">
 								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_moderation_tab_name"><?php _e( 'Moderation Tab Title', 'buddyforms-ultimate-member' ); ?></label>
+									<label for="buddyforms_ultimate_settings_moderation_tab_name"><?php esc_html_e( 'Moderation Tab Title', 'buddyforms-ultimate-member' ); ?></label>
 								</th>
 								<td class="forminp forminp-select">
-									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[moderation_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['moderation_tab_name'] ) ?>">
+									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[moderation_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['moderation_tab_name'] ); ?>">
 								</td>
 							</tr>
 
 							<tr>
 								<th colspan="2">
-									<small><?php echo sprintf( __( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
+									<small><?php echo sprintf( esc_html__( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), esc_url( get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ); ?> </small>
 								</th>
 							</tr>
 
 							<tr>
 								<th colspan="2">
-									<h3><span><?php _e( 'BuddyForms Collaborative', 'buddyforms-ultimate-member' ); ?></span></h3>
+									<h3><span><?php esc_html_e( 'BuddyForms Collaborative', 'buddyforms-ultimate-member' ); ?></span></h3>
 									<hr/>
-									<small><?php _e( 'You need the Collaborative Publishing Extension for ths option to take effect.', 'buddyforms-ultimate-member' ); ?></small>
+									<small><?php esc_html_e( 'You need the Collaborative Publishing Extension for ths option to take effect.', 'buddyforms-ultimate-member' ); ?></small>
 								</th>
 							</tr>
 							<tr valign="top">
 								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_collaborative_post_tab"><?php _e( 'Add Collaborative Posts Tab', 'buddyforms-ultimate-member' ); ?></label>
+									<label for="buddyforms_ultimate_settings_collaborative_post_tab"><?php esc_html_e( 'Add Collaborative Posts Tab', 'buddyforms-ultimate-member' ); ?></label>
 								</th>
 								<td class="forminp forminp-select">
 									<select name="buddyforms_ultimate_settings[collaborative_post_tab]" id="buddyforms_ultimate_settings_collaborative_post_tab">
 										<?php foreach ( $options as $item_key => $item_name ) : ?>
-											<option value="<?php echo $item_key ?>" <?php selected( $item_key, $ultimate_members_settings['collaborative_post_tab'] ); ?> ><?php echo $item_name ?></option>
+											<option value="<?php echo esc_attr( $item_key ); ?>" <?php selected( $item_key, $ultimate_members_settings['collaborative_post_tab'] ); ?> ><?php echo esc_html( $item_name ); ?></option>
 										<?php endforeach; ?>
 									</select>
 								</td>
 							</tr>
 							<tr valign="top">
 								<th scope="row" class="titledesc">
-									<label for="buddyforms_ultimate_settings_moderation_tab_name"><?php _e( 'Collaborative Tab Title', 'buddyforms-ultimate-member' ); ?></label>
+									<label for="buddyforms_ultimate_settings_moderation_tab_name"><?php esc_html_e( 'Collaborative Tab Title', 'buddyforms-ultimate-member' ); ?></label>
 								</th>
 								<td class="forminp forminp-select">
-									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[collaborative_post_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['collaborative_post_tab_name'] ) ?>">
+									<input type="text" style="max-width: 25rem" name="buddyforms_ultimate_settings[collaborative_post_tab_name]" id="buddyforms_ultimate_settings_moderation_tab_name" value="<?php echo esc_attr( $ultimate_members_settings['collaborative_post_tab_name'] ); ?>">
 								</td>
 							</tr>
 
 							<tr>
 								<th colspan="2">
-									<small><?php echo sprintf( __( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ?> </small>
+									<small><?php echo sprintf( esc_html__( 'For more privacy options check inside the UM Profile Member <a target="_blank" href="%s">here!</a>', 'buddyforms-ultimate-member' ), esc_url( get_admin_url( get_current_blog_id(), 'admin.php?page=um_options&tab=appearance&section=profile_menu' ) ) ); ?> </small>
 								</th>
 							</tr>
 

@@ -90,11 +90,8 @@ function bf_ultimate_member_get_redirect_link( $id = false ) {
 				if ( $wp_query->query_vars['bf_action'] == 'view' ) {
 					$link = get_the_permalink( $um_options['core_user'] ) . $user_permalink . '?profiletab=' . $parent_tab . '&subnav=posts-' . $form_slug;
 				}
-
 			}
-
 		}
-
 	}
 
 	return apply_filters( 'bf_ultimate_member_get_redirect_link', $link );

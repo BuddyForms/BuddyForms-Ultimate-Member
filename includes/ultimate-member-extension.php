@@ -52,11 +52,11 @@ function bf_profile_tabs( $tabs ) {
 
 				// Check if this form is grouped under a Parent Tap and only create the nav item once
 				if ( ! isset( $tabs[ $parent_tab_slug ] ) ) {
-					$tabs[ $parent_tab_slug ]                   = array(
+					$tabs[ $parent_tab_slug ] = array(
 						'name'   => $parent_tab_name,
 						'icon'   => $icon,
 						'custom' => true,
-						//'default_privacy'   => 3
+						// 'default_privacy'   => 3
 					);
 					$tabs[ $parent_tab_slug ]['subnav_default'] = 'posts-' . $form_slug;
 					$bf_um_tabs                                 = $tabs;
@@ -68,7 +68,7 @@ function bf_profile_tabs( $tabs ) {
 				$tab_name = ! empty( $form['singular_name'] ) ? $form['singular_name'] : $form['name'];
 
 				// Add the Subtabs to the Ultimate Member Menue
-				$tab_view_name                                               = __( 'View ', 'buddyforms-ultimate-member' ) . $tab_name;
+				$tab_view_name = __( 'View ', 'buddyforms-ultimate-member' ) . $tab_name;
 				$tabs[ $parent_tab_slug ]['subnav'][ 'posts-' . $form_slug ] = apply_filters( 'bf_ultimate_member_view_tab_name', $tab_view_name, $form_slug );
 
 				// Add the Subtab for the create only if diplayd profil is from loged in user.
@@ -77,7 +77,7 @@ function bf_profile_tabs( $tabs ) {
 					$current_user_id         = um_user( 'ID' );
 					$current_user_can_create = bf_user_can( $current_user_id, 'buddyforms_' . $form_slug . '_create', array(), $form_slug );
 					if ( $current_user_can_create ) {
-						$tab_form_name                                              = __( 'Create ', 'buddyforms-ultimate-member' ) . $tab_name;
+						$tab_form_name = __( 'Create ', 'buddyforms-ultimate-member' ) . $tab_name;
 						$tabs[ $parent_tab_slug ]['subnav'][ 'form-' . $form_slug ] = apply_filters( 'bf_ultimate_member_form_tab_name', $tab_form_name, $form_slug );
 					}
 				}
@@ -104,11 +104,11 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 	if ( ! isset( $_GET['profiletab'] ) ) {
 		return;
 	};
-	$parent_tab = $_GET['profiletab'];
+	$parent_tab = sanitize_text_field( wp_unslash( $_GET['profiletab'] ) );
 
 	$subnav_slug_default = $bf_um_tabs[ $parent_tab ]['subnav_default'];
 
-	$subnav_slug = isset( $_GET['subnav'] ) ? $_GET['subnav'] : $subnav_slug_default;
+	$subnav_slug = isset( $_GET['subnav'] ) ? sanitize_text_field( wp_unslash( $_GET['subnav'] ) ) : $subnav_slug_default;
 
 	$form_slug = strstr( $subnav_slug, '-' );
 	$form_slug = substr( $form_slug, 1 );
@@ -117,9 +117,9 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 	$profiletab_type = $profiletab_type[0];
 
 	// Check if the ultimate member view is a form view and add the coret content
-	if ( isset( $_GET['profiletab'] ) && $_GET['profiletab'] == $parent_tab ) {
+	if ( isset( $_GET['profiletab'] ) && sanitize_text_field( wp_unslash( $_GET['profiletab'] ) ) == $parent_tab ) {
 
-		$action = ( isset( $_GET['bf_um_action'] ) ) ? $_GET['bf_um_action'] : 'create';
+		$action = ( isset( $_GET['bf_um_action'] ) ) ? sanitize_text_field( wp_unslash( $_GET['bf_um_action'] ) ) : 'create';
 		if ( isset( $subnav_slug ) && $profiletab_type == 'posts' ) {
 
 			$paged = 1;
@@ -130,23 +130,23 @@ function bf_profile_tabs_content( $subnav_defalt ) {
 			$um_user_id = um_profile_id();
 
 			// Display the posts
-			echo do_shortcode( '[buddyforms_the_loop paged=' . $paged  . ' user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . $um_user_id . '"]' );
+			echo do_shortcode( '[buddyforms_the_loop paged=' . $paged . ' user_logged_in_only="false" form_slug="' . $form_slug . '" author="' . $um_user_id . '"]' );
 
 		} elseif ( isset( $_GET['subnav'] ) && $profiletab_type == 'form' ) {
 
 			// Create the arguments aray for the form to get displayed
 			$args = array(
-				'form_slug' => $form_slug
+				'form_slug' => $form_slug,
 			);
 			if ( $action !== 'create' ) {
 				// Add the post id if post edit
 				if ( isset( $_GET['bf_post_id'] ) ) {
-					$args['post_id'] = $_GET['bf_post_id'];
+					$args['post_id'] = sanitize_text_field( wp_unslash( $_GET['bf_post_id'] ) );
 				}
 
 				// Add the revisionsid if needed
 				if ( isset( $_GET['bf_rev_id'] ) ) {
-					$args['revision_id'] = $_GET['bf_rev_id'];
+					$args['revision_id'] = sanitize_text_field( wp_unslash( $_GET['bf_rev_id'] ) );
 				}
 			}
 
