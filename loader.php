@@ -3,7 +3,7 @@
  * Plugin Name: BuddyForms Ultimate Member
  * Plugin URI: https://themekraft.com/products/ultimate-member/
  * Description: Extend Ultimate Member Profiles with BuddyForms
- * Version: 1.3.14
+ * Version: 1.3.15
  * Author: ThemeKraft
  * Author URI: https://themekraft.com/buddyforms/
  * License: GPLv2 or later
@@ -29,17 +29,6 @@
  *
  *****************************************************************************
  */
-
-add_action( 'activate_plugin', 'buddyforms_um_parent_validation', 10, 2 );
-
-function buddyforms_um_parent_validation( $plugin, $network_wide ) {
-
-	// Check if BuddyForms is activated
-	if ( ! buddyforms_um_fs_is_parent_active() ) {
-		wp_die( '<p>To activate <strong>BuddyForms Ultimate Member</strong> addon first you <strong>need</strong> to activate <strong>BuddyForms</strong>.</p>' );
-	}
-
-}
 
 add_action( 'init', 'buddyforms_ultimate_members_init' );
 
