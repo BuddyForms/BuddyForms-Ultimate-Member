@@ -8,3 +8,7 @@
 .um .the_buddyforms_form .bf_field_group textarea.error {
     border: 1px solid red !important;
 }
+
+.um .the_buddyforms_form .bf_field_group .upload_field_from_url {
+    display: none !important;
+}

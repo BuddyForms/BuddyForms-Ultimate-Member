@@ -2,9 +2,9 @@
 Contributors: svenl77, konradS, buddyforms, themekraft, gfirem
 Tags: BuddyForms, Ultimate Member, forms, form, custom form, custom forms, form administration, form builder, form creation, form creator, form manager, forms, forms builder, forms creation, forms creator, forms manager
 Requires at least: 3.9
-Tested up to: 5.5
+Tested up to: 6.1.1
 License: GPLv2 or later
-Stable tag: 1.3.8
+Stable tag: 1.3.16
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Submit and Manage Posts from your Ultimate Member Profile. Create Forms with an easy to use Form Builder! Create Tabs - Group Forms. Works with any PostType Plugin and Theme.
@@ -90,6 +90,37 @@ BuddyForms and Ultimate Member
 1. **Create and Edit Posts from the Ultimate Member Profile**
 
 == Changelog ==
+= 1.3.16 - 25 Dec 2022 =
+* Enabled trial version.
+* Tested up to WordPress 6.1.1
+
+= 1.3.15 - 6 Nov 2022 =
+* Removed wp_die call after trying to activate plugin without BuddyForms or UM installed
+* Updated download link in TGM class.
+* Tested up to WordPress 6.1
+
+= 1.3.14 - 6 Aug 2022 =
+* Fixed security issue.
+* Improved Freemius integration.
+* Tested up to Wordpress 6.0.1
+
+= 1.3.13 - 17 May 2022 =
+* Updated readme.txt
+
+= 1.3.12 - 31 Mar 2022 =
+* Tested up to WordPress 5.9
+
+= 1.3.11 - 23 Dec 2021 =
+* Fixed validation issue during plugin activation.
+
+= 1.3.10 - 10 Jul 2021 =
+* Tested up to WordPress 5.8
+* Fixed issue with pagination on the integrated form post list. This fix require BuddyForms 2.5.31 or higher.
+* Fixed CSS glitch on the Upload field.
+
+= 1.3.9 - 8 Mar 2021 =
+* Tested with latest version of WordPress.
+
 = 1.3.8 - 20 Nov 2020 =
 * Fixed internationalization and integration with Loco Translate.
 * Improved usability on the privacy options in both moderation and collaboration tab.

@@ -63,7 +63,7 @@ function buddyforms_moderators_um_add_tab_visibility( $tabs ) {
 	return $tabs;
 }
 
-//add_filter( 'um_user_profile_tabs', 'buddyforms_moderators_um_add_tab_visibility', 2000, 1 );
+// add_filter( 'um_user_profile_tabs', 'buddyforms_moderators_um_add_tab_visibility', 2000, 1 );
 
 // Action
 function um_profile_content_buddyforms_moderators_um_add_tab_default( $args ) {
