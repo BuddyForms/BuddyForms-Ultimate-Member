@@ -20,7 +20,6 @@
   "license": "GPLv2 or later",
   "minimum-stability": "dev",
   "require": {
-    "consolidation/robo": "^1.0.0",
-    "bamarni/composer-bin-plugin": "dev-master"
+    "consolidation/robo": "^1.0.0"
   }
 }
