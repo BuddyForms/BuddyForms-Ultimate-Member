@@ -3,7 +3,7 @@
  * Plugin Name: BuddyForms Ultimate Member
  * Plugin URI: https://themekraft.com/products/ultimate-member/
  * Description: Extend Ultimate Member Profiles with BuddyForms
- * Version: 1.3.15
+ * Version: 1.3.16
  * Author: ThemeKraft
  * Author URI: https://themekraft.com/buddyforms/
  * License: GPLv2 or later
@@ -173,7 +173,10 @@ function buddyforms_um_fs() {
 				// If your addon is a serviceware, set this option to false.
 				'has_premium_version' => true,
 				'has_paid_plans'      => true,
-				'bundle_license_auto_activation' => true,
+				'trial'               => array(
+                    'days'               => 7,
+                    'is_require_payment' => true,
+                ),
 				'parent'              => array(
 					'id'         => '391',
 					'slug'       => 'buddyforms',
@@ -185,6 +188,7 @@ function buddyforms_um_fs() {
 					'first-path' => 'edit.php?post_type=buddyforms&page=buddyforms_welcome_screen',
 					'support'    => false,
 				),
+				'bundle_license_auto_activation' => true,
 			)
 		);
 	}
